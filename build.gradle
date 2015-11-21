@@ -32,8 +32,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
     compile("mysql:mysql-connector-java:5.1.37")
+
+    compile('jstl:jstl:1.2')
+    compile('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.28')
 
     compile ('org.webjars:bootstrap:3.3.5')
     compile ('org.webjars:jquery:2.1.4')
