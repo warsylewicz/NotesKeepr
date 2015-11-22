@@ -1,10 +1,16 @@
 package noteKeepr.config;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
 	@Override
@@ -12,23 +18,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		http
 				.authorizeRequests()
-				.antMatchers("/", "/Welcome").permitAll()
+				.antMatchers("/", "/Welcome", "/Register").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
+				.defaultSuccessUrl("/Main")
 				.loginPage("/Login")
 				.permitAll()
 				.and()
 				.logout()
-				.logoutUrl("/Welcome")
+				.logoutSuccessUrl("/")
 				.permitAll();
 	}
 
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
-//	{
-//		auth
-//				.inMemoryAuthentication()
-//				.withUser("user").password("password").roles("USER");
-//	}
+	@Override
+	public void configure(WebSecurity web)
+	{
+
+
+
+		web.ignoring().antMatchers("/bower_components/**");
+	}
 }

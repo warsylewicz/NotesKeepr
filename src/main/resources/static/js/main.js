@@ -1,6 +1,49 @@
-var application = angular.module('scotchApp', ['ngRoute']);
+var application = angular.module('application', ['ngRoute'])
 
-application.controller('mainController', function($scope) {
+    .run(function ($rootScope, $http) {
 
-    $scope.message = 'Everyone come and see how good I look!';
-});
+        $http({
+            method: 'GET',
+            url: '/CurrentUser'
+        }).then(function successCallback(response) {
+            $rootScope.currentUser = response.data;
+            $rootScope.isAdmin = false;
+            angular.forEach($rootScope.currentUser.roles, function(role, index) {
+               if (role === "ADMIN")
+               {
+                   $rootScope.isAdmin = true;
+               }
+            });
+
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    })
+
+    .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+
+        $routeProvider.when('/Notes', {
+            templateUrl: 'pages/notes.html',
+            controller: 'notesController'
+        });
+
+        $routeProvider.when('/UserDetails', {
+            templateUrl: 'pages/userDetails.html',
+            controller: 'userDetailsController'
+        });
+
+        $routeProvider.when('/Admin', {
+            templateUrl: 'pages/admin.html',
+            controller: 'adminController'
+        });
+
+        $routeProvider.otherwise({redirectTo: '/Notes'});
+
+        $locationProvider.html5Mode({enabled: true, requireBase: false});
+    }]);
+
+
+
+
+

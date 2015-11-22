@@ -6,7 +6,7 @@
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
-angular.module("ui.bootstrap.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/carousel/carousel.html","template/carousel/slide.html","template/datepicker/datepicker.html","template/datepicker/day.html","template/datepicker/month.html","template/datepicker/popup.html","template/datepicker/year.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-popup.html","template/tooltip/tooltip-popup.html","template/tooltip/tooltip-template-popup.html","template/popover/popover-html.html","template/popover/popover-template.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/timepicker/timepicker.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
+angular.module("ui.bootstrap.tpls", ["templates/accordion/accordion-group.html","templates/accordion/accordion.html","templates/alert/alert.html","templates/carousel/carousel.html","templates/carousel/slide.html","templates/datepicker/datepicker.html","templates/datepicker/day.html","templates/datepicker/month.html","templates/datepicker/popup.html","templates/datepicker/year.html","templates/modal/backdrop.html","templates/modal/window.html","templates/pagination/pager.html","templates/pagination/pagination.html","templates/tooltip/tooltip-html-popup.html","templates/tooltip/tooltip-popup.html","templates/tooltip/tooltip-templates-popup.html","templates/popover/popover-html.html","templates/popover/popover-templates.html","templates/popover/popover.html","templates/progressbar/bar.html","templates/progressbar/progress.html","templates/progressbar/progressbar.html","templates/rating/rating.html","templates/tabs/tab.html","templates/tabs/tabset.html","templates/timepicker/timepicker.html","templates/typeahead/typeahead-match.html","templates/typeahead/typeahead-popup.html"]);
 angular.module('ui.bootstrap.collapse', [])
 
   .directive('uibCollapse', ['$animate', '$injector', function($animate, $injector) {
@@ -218,7 +218,7 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
     controllerAs: 'accordion',
     transclude: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/accordion/accordion.html';
+      return attrs.templateUrl || 'templates/accordion/accordion.html';
     }
   };
 })
@@ -227,10 +227,10 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
 .directive('uibAccordionGroup', function() {
   return {
     require: '^uibAccordion',         // We need this directive to be inside an accordion
-    transclude: true,              // It transcludes the contents of the directive into the template
-    replace: true,                // The element containing the directive will be replaced with the template
+    transclude: true,              // It transcludes the contents of the directive into the templates
+    replace: true,                // The element containing the directive will be replaced with the templates
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/accordion/accordion-group.html';
+      return attrs.templateUrl || 'templates/accordion/accordion-group.html';
     },
     scope: {
       heading: '@',               // Interpolate the heading attribute onto this scope
@@ -274,14 +274,14 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
     require: '^uibAccordionGroup',
     link: function(scope, element, attrs, accordionGroupCtrl, transclude) {
       // Pass the heading to the accordion-group controller
-      // so that it can be transcluded into the right place in the template
+      // so that it can be transcluded into the right place in the templates
       // [The second parameter to transclude causes the elements to be cloned so that they work in ng-repeat]
       accordionGroupCtrl.setHeading(transclude(scope, angular.noop));
     }
   };
 })
 
-// Use in the accordion-group template to indicate where you want the heading to be transcluded
+// Use in the accordion-group templates to indicate where you want the heading to be transcluded
 // You must provide the property on the accordion-group controller that will hold the transcluded element
 .directive('uibAccordionTransclude', function() {
   return {
@@ -323,7 +323,7 @@ angular.module('ui.bootstrap.accordion')
       transclude: true,
       replace: false,
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/accordion/accordion.html';
+        return attrs.templateUrl || 'templates/accordion/accordion.html';
       },
       link: function() {
         if (!$accordionSuppressWarning) {
@@ -337,10 +337,10 @@ angular.module('ui.bootstrap.accordion')
     return {
       require: '^accordion',         // We need this directive to be inside an accordion
       restrict: 'EA',
-      transclude: true,              // It transcludes the contents of the directive into the template
-      replace: true,                // The element containing the directive will be replaced with the template
+      transclude: true,              // It transcludes the contents of the directive into the templates
+      replace: true,                // The element containing the directive will be replaced with the templates
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/accordion/accordion-group.html';
+        return attrs.templateUrl || 'templates/accordion/accordion-group.html';
       },
       scope: {
         heading: '@',               // Interpolate the heading attribute onto this scope
@@ -391,7 +391,7 @@ angular.module('ui.bootstrap.accordion')
           $log.warn('accordion-heading is now deprecated. Use uib-accordion-heading instead.');
         }
         // Pass the heading to the accordion-group controller
-        // so that it can be transcluded into the right place in the template
+        // so that it can be transcluded into the right place in the templates
         // [The second parameter to transclude causes the elements to be cloned so that they work in ng-repeat]
         accordionGroupCtrl.setHeading(transclude(scope, angular.noop));
       }
@@ -437,7 +437,7 @@ angular.module('ui.bootstrap.alert', [])
     controller: 'UibAlertController',
     controllerAs: 'alert',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/alert/alert.html';
+      return attrs.templateUrl || 'templates/alert/alert.html';
     },
     transclude: true,
     replace: true,
@@ -470,7 +470,7 @@ angular.module('ui.bootstrap.alert')
       controller: 'AlertController',
       controllerAs: 'alert',
       templateUrl: function(element, attrs) {
-        return attrs.templateUrl || 'template/alert/alert.html';
+        return attrs.templateUrl || 'templates/alert/alert.html';
       },
       transclude: true,
       replace: true,
@@ -947,7 +947,7 @@ angular.module('ui.bootstrap.carousel', [])
     controllerAs: 'carousel',
     require: 'carousel',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/carousel.html';
+      return attrs.templateUrl || 'templates/carousel/carousel.html';
     },
     scope: {
       interval: '=',
@@ -1007,7 +1007,7 @@ function CarouselDemoCtrl($scope) {
     transclude: true,
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/slide.html';
+      return attrs.templateUrl || 'templates/carousel/slide.html';
     },
     scope: {
       active: '=?',
@@ -1134,7 +1134,7 @@ angular.module('ui.bootstrap.carousel')
     controllerAs: 'carousel',
     require: 'carousel',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/carousel.html';
+      return attrs.templateUrl || 'templates/carousel/carousel.html';
     },
     scope: {
       interval: '=',
@@ -1156,7 +1156,7 @@ angular.module('ui.bootstrap.carousel')
     transclude: true,
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/carousel/slide.html';
+      return attrs.templateUrl || 'templates/carousel/slide.html';
     },
     scope: {
       active: '=?',
@@ -2011,7 +2011,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   return {
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/datepicker.html';
+      return attrs.templateUrl || 'templates/datepicker/datepicker.html';
     },
     scope: {
       datepickerMode: '=?',
@@ -2034,7 +2034,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   return {
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/day.html';
+      return attrs.templateUrl || 'templates/datepicker/day.html';
     },
     require: ['^?uibDatepicker', 'uibDaypicker', '^?datepicker'],
     controller: 'UibDaypickerController',
@@ -2051,7 +2051,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   return {
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/month.html';
+      return attrs.templateUrl || 'templates/datepicker/month.html';
     },
     require: ['^?uibDatepicker', 'uibMonthpicker', '^?datepicker'],
     controller: 'UibMonthpickerController',
@@ -2068,7 +2068,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   return {
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/year.html';
+      return attrs.templateUrl || 'templates/datepicker/year.html';
     },
     require: ['^?uibDatepicker', 'uibYearpicker', '^?datepicker'],
     controller: 'UibYearpickerController',
@@ -2084,8 +2084,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
 
 .constant('uibDatepickerPopupConfig', {
   datepickerPopup: 'yyyy-MM-dd',
-  datepickerPopupTemplateUrl: 'template/datepicker/popup.html',
-  datepickerTemplateUrl: 'template/datepicker/datepicker.html',
+  datepickerPopupTemplateUrl: 'templates/datepicker/popup.html',
+  datepickerTemplateUrl: 'templates/datepicker/datepicker.html',
   html5Types: {
     date: 'yyyy-MM-dd',
     'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
@@ -2238,7 +2238,7 @@ function(scope, element, attrs, $compile, $parse, $document, $rootScope, $positi
     element.bind('keydown', inputKeydownBind);
 
     $popup = $compile(popupEl)(scope);
-    // Prevent jQuery cache memory leak (template is now redundant after linking)
+    // Prevent jQuery cache memory leak (templates is now redundant after linking)
     popupEl.remove();
 
     if (appendToBody) {
@@ -2440,7 +2440,7 @@ function(scope, element, attrs, $compile, $parse, $document, $rootScope, $positi
     replace: true,
     transclude: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/popup.html';
+      return attrs.templateUrl || 'templates/datepicker/popup.html';
     }
   };
 });
@@ -2648,7 +2648,7 @@ angular.module('ui.bootstrap.datepicker')
   return {
     replace: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/datepicker.html';
+      return attrs.templateUrl || 'templates/datepicker/datepicker.html';
     },
     scope: {
       datepickerMode: '=?',
@@ -2674,7 +2674,7 @@ angular.module('ui.bootstrap.datepicker')
 .directive('daypicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
   return {
     replace: true,
-    templateUrl: 'template/datepicker/day.html',
+    templateUrl: 'templates/datepicker/day.html',
     require: ['^datepicker', 'daypicker'],
     controller: 'UibDaypickerController',
     link: function(scope, element, attrs, ctrls) {
@@ -2693,7 +2693,7 @@ angular.module('ui.bootstrap.datepicker')
 .directive('monthpicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
   return {
     replace: true,
-    templateUrl: 'template/datepicker/month.html',
+    templateUrl: 'templates/datepicker/month.html',
     require: ['^datepicker', 'monthpicker'],
     controller: 'UibMonthpickerController',
     link: function(scope, element, attrs, ctrls) {
@@ -2712,7 +2712,7 @@ angular.module('ui.bootstrap.datepicker')
 .directive('yearpicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
   return {
     replace: true,
-    templateUrl: 'template/datepicker/year.html',
+    templateUrl: 'templates/datepicker/year.html',
     require: ['^datepicker', 'yearpicker'],
     controller: 'UibYearpickerController',
     link: function(scope, element, attrs, ctrls) {
@@ -2759,7 +2759,7 @@ angular.module('ui.bootstrap.datepicker')
     replace: true,
     transclude: true,
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/datepicker/popup.html';
+      return attrs.templateUrl || 'templates/datepicker/popup.html';
     },
     link: function() {
       if (!$datepickerSuppressWarning) {
@@ -3552,7 +3552,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
 
     return {
       replace: true,
-      templateUrl: 'template/modal/backdrop.html',
+      templateUrl: 'templates/modal/backdrop.html',
       compile: function(tElement, tAttrs) {
         tElement.addClass(tAttrs.backdropClass);
         return linkFn;
@@ -3602,7 +3602,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
       replace: true,
       transclude: true,
       templateUrl: function(tElement, tAttrs) {
-        return tAttrs.templateUrl || 'template/modal/window.html';
+        return tAttrs.templateUrl || 'templates/modal/window.html';
       },
       link: function(scope, element, attrs) {
         element.addClass(attrs.windowClass || '');
@@ -3618,18 +3618,18 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
           }
         };
 
-        // moved from template to fix issue #2280
+        // moved from templates to fix issue #2280
         element.on('click', scope.close);
 
         // This property is only added to the scope for the purpose of detecting when this directive is rendered.
-        // We can detect that by using this property in the template associated with this directive and then use
+        // We can detect that by using this property in the templates associated with this directive and then use
         // {@link Attribute#$observe} on it. For more details please see {@link TableColumnResize}.
         scope.$isRendered = true;
 
         // Deferred object that will be resolved when this modal is render.
         var modalRenderDeferObj = $q.defer();
         // Observe function will be called on next digest cycle after compilation, ensuring that the DOM is ready.
-        // In order to use this way of finding whether DOM is ready, we need to observe a scope property used in modal's template.
+        // In order to use this way of finding whether DOM is ready, we need to observe a scope property used in modal's templates.
         attrs.$observe('modalRender', function(value) {
           if (value == 'true') {
             modalRenderDeferObj.resolve();
@@ -4090,7 +4090,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap'])
 
             //verify options
             if (!modalOptions.template && !modalOptions.templateUrl) {
-              throw new Error('One of template or templateUrl options is required.');
+              throw new Error('One of templates or templateUrl options is required.');
             }
 
             var templateAndResolvePromise =
@@ -4207,7 +4207,7 @@ angular.module('ui.bootstrap.modal')
 
       return {
         replace: true,
-        templateUrl: 'template/modal/backdrop.html',
+        templateUrl: 'templates/modal/backdrop.html',
         compile: function(tElement, tAttrs) {
           tElement.addClass(tAttrs.backdropClass);
           return linkFn;
@@ -4259,7 +4259,7 @@ angular.module('ui.bootstrap.modal')
         replace: true,
         transclude: true,
         templateUrl: function(tElement, tAttrs) {
-          return tAttrs.templateUrl || 'template/modal/window.html';
+          return tAttrs.templateUrl || 'templates/modal/window.html';
         },
         link: function(scope, element, attrs) {
           if (!$modalSuppressWarning) {
@@ -4278,18 +4278,18 @@ angular.module('ui.bootstrap.modal')
             }
           };
 
-          // moved from template to fix issue #2280
+          // moved from templates to fix issue #2280
           element.on('click', scope.close);
 
           // This property is only added to the scope for the purpose of detecting when this directive is rendered.
-          // We can detect that by using this property in the template associated with this directive and then use
+          // We can detect that by using this property in the templates associated with this directive and then use
           // {@link Attribute#$observe} on it. For more details please see {@link TableColumnResize}.
           scope.$isRendered = true;
 
           // Deferred object that will be resolved when this modal is render.
           var modalRenderDeferObj = $q.defer();
           // Observe function will be called on next digest cycle after compilation, ensuring that the DOM is ready.
-          // In order to use this way of finding whether DOM is ready, we need to observe a scope property used in modal's template.
+          // In order to use this way of finding whether DOM is ready, we need to observe a scope property used in modal's templates.
           attrs.$observe('modalRender', function(value) {
             if (value == 'true') {
               modalRenderDeferObj.resolve();
@@ -4517,7 +4517,7 @@ angular.module('ui.bootstrap.pagination', [])
     controller: 'UibPaginationController',
     controllerAs: 'pagination',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/pagination/pagination.html';
+      return attrs.templateUrl || 'templates/pagination/pagination.html';
     },
     replace: true,
     link: function(scope, element, attrs, ctrls) {
@@ -4542,7 +4542,7 @@ angular.module('ui.bootstrap.pagination', [])
         });
       }
 
-      // Create page object used in template
+      // Create page object used in templates
       function makePage(number, text, isActive) {
         return {
           number: number,
@@ -4632,7 +4632,7 @@ angular.module('ui.bootstrap.pagination', [])
     controller: 'UibPaginationController',
     controllerAs: 'pagination',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/pagination/pager.html';
+      return attrs.templateUrl || 'templates/pagination/pager.html';
     },
     replace: true,
     link: function(scope, element, attrs, ctrls) {
@@ -4744,7 +4744,7 @@ angular.module('ui.bootstrap.pagination')
     controller: 'PaginationController',
     controllerAs: 'pagination',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/pagination/pagination.html';
+      return attrs.templateUrl || 'templates/pagination/pagination.html';
     },
     replace: true,
     link: function(scope, element, attrs, ctrls) {
@@ -4772,7 +4772,7 @@ angular.module('ui.bootstrap.pagination')
         });
       }
 
-      // Create page object used in template
+      // Create page object used in templates
       function makePage(number, text, isActive) {
         return {
           number: number,
@@ -4855,7 +4855,7 @@ angular.module('ui.bootstrap.pagination')
     controller: 'PaginationController',
     controllerAs: 'pagination',
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/pagination/pager.html';
+      return attrs.templateUrl || 'templates/pagination/pager.html';
     },
     replace: true,
     link: function(scope, element, attrs, ctrls) {
@@ -5428,7 +5428,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
         var thisChangeId = ++changeCounter;
 
         if (src) {
-          //set the 2nd param to true to ignore the template request error so that the inner
+          //set the 2nd param to true to ignore the templates request error so that the inner
           //contents and scope can be cleaned up.
           $templateRequest(src, true).then(function(response) {
             if (thisChangeId !== changeCounter) { return; }
@@ -5489,7 +5489,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
   return {
     replace: true,
     scope: { content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/tooltip/tooltip-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-popup.html',
     link: function(scope, element) {
       element.addClass('tooltip');
     }
@@ -5505,7 +5505,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
     replace: true,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&',
       originScope: '&' },
-    templateUrl: 'template/tooltip/tooltip-template-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-templates-popup.html',
     link: function(scope, element) {
       element.addClass('tooltip');
     }
@@ -5522,7 +5522,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest) {
   return {
     replace: true,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/tooltip/tooltip-html-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-html-popup.html',
     link: function(scope, element) {
       element.addClass('tooltip');
     }
@@ -5560,7 +5560,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest,   $log,   $tooltipSu
   return {
     link: function(scope, elem, attrs) {
       if (!$tooltipSuppressWarning) {
-        $log.warn('tooltip-template-transclude is now deprecated. Use uib-tooltip-template-transclude instead.');
+        $log.warn('tooltip-templates-transclude is now deprecated. Use uib-tooltip-templates-transclude instead.');
       }
 
       var origScope = scope.$eval(attrs.tooltipTemplateTranscludeScope);
@@ -5592,7 +5592,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest,   $log,   $tooltipSu
         var thisChangeId = ++changeCounter;
 
         if (src) {
-          //set the 2nd param to true to ignore the template request error so that the inner
+          //set the 2nd param to true to ignore the templates request error so that the inner
           //contents and scope can be cleaned up.
           $templateRequest(src, true).then(function(response) {
             if (thisChangeId !== changeCounter) { return; }
@@ -5650,7 +5650,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest,   $log,   $tooltipSu
   return {
     replace: true,
     scope: { content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/tooltip/tooltip-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-popup.html',
     link: function(scope, element) {
       if (!$tooltipSuppressWarning) {
         $log.warn('tooltip-popup is now deprecated. Use uib-tooltip-popup instead.');
@@ -5670,10 +5670,10 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest,   $log,   $tooltipSu
     replace: true,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&',
       originScope: '&' },
-    templateUrl: 'template/tooltip/tooltip-template-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-templates-popup.html',
     link: function(scope, element) {
       if (!$tooltipSuppressWarning) {
-        $log.warn('tooltip-template-popup is now deprecated. Use uib-tooltip-template-popup instead.');
+        $log.warn('tooltip-templates-popup is now deprecated. Use uib-tooltip-templates-popup instead.');
       }
 
       element.addClass('tooltip');
@@ -5691,7 +5691,7 @@ function ($animate ,  $sce ,  $compile ,  $templateRequest,   $log,   $tooltipSu
   return {
     replace: true,
     scope: { contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/tooltip/tooltip-html-popup.html',
+    templateUrl: 'templates/tooltip/tooltip-html-popup.html',
     link: function(scope, element) {
       if (!$tooltipSuppressWarning) {
         $log.warn('tooltip-html-popup is now deprecated. Use uib-tooltip-html-popup instead.');
@@ -5720,7 +5720,7 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
     replace: true,
     scope: { title: '@', contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&',
       originScope: '&' },
-    templateUrl: 'template/popover/popover-template.html',
+    templateUrl: 'templates/popover/popover-templates.html',
     link: function(scope, element) {
       element.addClass('popover');
     }
@@ -5737,7 +5737,7 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
   return {
     replace: true,
     scope: { contentExp: '&', title: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/popover/popover-html.html',
+    templateUrl: 'templates/popover/popover-html.html',
     link: function(scope, element) {
       element.addClass('popover');
     }
@@ -5754,7 +5754,7 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
   return {
     replace: true,
     scope: { title: '@', content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/popover/popover.html',
+    templateUrl: 'templates/popover/popover.html',
     link: function(scope, element) {
       element.addClass('popover');
     }
@@ -5776,10 +5776,10 @@ angular.module('ui.bootstrap.popover')
     replace: true,
     scope: { title: '@', contentExp: '&', placement: '@', popupClass: '@', animation: '&', isOpen: '&',
       originScope: '&' },
-    templateUrl: 'template/popover/popover-template.html',
+    templateUrl: 'templates/popover/popover-templates.html',
     link: function(scope, element) {
       if (!$popoverSuppressWarning) {
-        $log.warn('popover-template-popup is now deprecated. Use uib-popover-template-popup instead.');
+        $log.warn('popover-templates-popup is now deprecated. Use uib-popover-templates-popup instead.');
       }
 
       element.addClass('popover');
@@ -5797,7 +5797,7 @@ angular.module('ui.bootstrap.popover')
   return {
     replace: true,
     scope: { contentExp: '&', title: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/popover/popover-html.html',
+    templateUrl: 'templates/popover/popover-html.html',
     link: function(scope, element) {
       if (!$popoverSuppressWarning) {
         $log.warn('popover-html-popup is now deprecated. Use uib-popover-html-popup instead.');
@@ -5818,7 +5818,7 @@ angular.module('ui.bootstrap.popover')
   return {
     replace: true,
     scope: { title: '@', content: '@', placement: '@', popupClass: '@', animation: '&', isOpen: '&' },
-    templateUrl: 'template/popover/popover.html',
+    templateUrl: 'templates/popover/popover.html',
     link: function(scope, element) {
       if (!$popoverSuppressWarning) {
         $log.warn('popover-popup is now deprecated. Use uib-popover-popup instead.');
@@ -5903,7 +5903,7 @@ angular.module('ui.bootstrap.progressbar', [])
     scope: {
       max: '=?'
     },
-    templateUrl: 'template/progressbar/progress.html'
+    templateUrl: 'templates/progressbar/progress.html'
   };
 })
 
@@ -5916,7 +5916,7 @@ angular.module('ui.bootstrap.progressbar', [])
       value: '=',
       type: '@'
     },
-    templateUrl: 'template/progressbar/bar.html',
+    templateUrl: 'templates/progressbar/bar.html',
     link: function(scope, element, attrs, progressCtrl) {
       progressCtrl.addBar(scope, element, attrs);
     }
@@ -5933,7 +5933,7 @@ angular.module('ui.bootstrap.progressbar', [])
       max: '=?',
       type: '@'
     },
-    templateUrl: 'template/progressbar/progressbar.html',
+    templateUrl: 'templates/progressbar/progressbar.html',
     link: function(scope, element, attrs, progressCtrl) {
       progressCtrl.addBar(scope, angular.element(element.children()[0]), {title: attrs.title});
     }
@@ -6011,7 +6011,7 @@ angular.module('ui.bootstrap.progressbar')
       max: '=?',
       title: '@?'
     },
-    templateUrl: 'template/progressbar/progress.html',
+    templateUrl: 'templates/progressbar/progress.html',
     link: function() {
       if (!$progressSuppressWarning) {
         $log.warn('progress is now deprecated. Use uib-progress instead.');
@@ -6029,7 +6029,7 @@ angular.module('ui.bootstrap.progressbar')
       value: '=',
       type: '@'
     },
-    templateUrl: 'template/progressbar/bar.html',
+    templateUrl: 'templates/progressbar/bar.html',
     link: function(scope, element, attrs, progressCtrl) {
       if (!$progressSuppressWarning) {
         $log.warn('bar is now deprecated. Use uib-bar instead.');
@@ -6049,7 +6049,7 @@ angular.module('ui.bootstrap.progressbar')
       max: '=?',
       type: '@'
     },
-    templateUrl: 'template/progressbar/progressbar.html',
+    templateUrl: 'templates/progressbar/progressbar.html',
     link: function(scope, element, attrs, progressCtrl) {
       if (!$progressSuppressWarning) {
         $log.warn('progressbar is now deprecated. Use uib-progressbar instead.');
@@ -6150,7 +6150,7 @@ angular.module('ui.bootstrap.rating', [])
       onLeave: '&'
     },
     controller: 'UibRatingController',
-    templateUrl: 'template/rating/rating.html',
+    templateUrl: 'templates/rating/rating.html',
     replace: true,
     link: function(scope, element, attrs, ctrls) {
       var ratingCtrl = ctrls[0], ngModelCtrl = ctrls[1];
@@ -6185,7 +6185,7 @@ angular.module('ui.bootstrap.rating')
       onLeave: '&'
     },
     controller: 'RatingController',
-    templateUrl: 'template/rating/rating.html',
+    templateUrl: 'templates/rating/rating.html',
     replace: true,
     link: function(scope, element, attrs, ctrls) {
       if (!$ratingSuppressWarning) {
@@ -6297,7 +6297,7 @@ angular.module('ui.bootstrap.tabs', [])
       type: '@'
     },
     controller: 'UibTabsetController',
-    templateUrl: 'template/tabs/tabset.html',
+    templateUrl: 'templates/tabs/tabset.html',
     link: function(scope, element, attrs) {
       scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
       scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
@@ -6390,7 +6390,7 @@ angular.module('ui.bootstrap.tabs', [])
     require: '^uibTabset',
     restrict: 'EA',
     replace: true,
-    templateUrl: 'template/tabs/tab.html',
+    templateUrl: 'templates/tabs/tab.html',
     transclude: true,
     scope: {
       active: '=?',
@@ -6514,7 +6514,7 @@ angular.module('ui.bootstrap.tabs')
         type: '@'
       },
       controller: 'TabsetController',
-      templateUrl: 'template/tabs/tabset.html',
+      templateUrl: 'templates/tabs/tabset.html',
       link: function(scope, element, attrs) {
 
         if (!$tabsSuppressWarning) {
@@ -6531,7 +6531,7 @@ angular.module('ui.bootstrap.tabs')
       require: '^tabset',
       restrict: 'EA',
       replace: true,
-      templateUrl: 'template/tabs/tab.html',
+      templateUrl: 'templates/tabs/tab.html',
       transclude: true,
       scope: {
         active: '=?',
@@ -6748,7 +6748,7 @@ angular.module('ui.bootstrap.timepicker', [])
       $scope.showMeridian = !!value;
 
       if (ngModelCtrl.$error.time) {
-        // Evaluate from template
+        // Evaluate from templates
         var hours = getHoursFromTemplate(), minutes = getMinutesFromTemplate();
         if (angular.isDefined(hours) && angular.isDefined(minutes)) {
           selected.setHours(hours);
@@ -7010,7 +7010,7 @@ angular.module('ui.bootstrap.timepicker', [])
     replace: true,
     scope: {},
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/timepicker/timepicker.html';
+      return attrs.templateUrl || 'templates/timepicker/timepicker.html';
     },
     link: function(scope, element, attrs, ctrls) {
       var timepickerCtrl = ctrls[0], ngModelCtrl = ctrls[1];
@@ -7049,7 +7049,7 @@ angular.module('ui.bootstrap.timepicker')
     replace: true,
     scope: {},
     templateUrl: function(element, attrs) {
-      return attrs.templateUrl || 'template/timepicker/timepicker.html';
+      return attrs.templateUrl || 'templates/timepicker/timepicker.html';
     },
     link: function(scope, element, attrs, ctrls) {
       if (!$timepickerSuppressWarning) {
@@ -7185,13 +7185,13 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position'])
       query: 'query',
       position: 'position'
     });
-    //custom item template
+    //custom item templates
     if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
       popUpEl.attr('template-url', attrs.typeaheadTemplateUrl);
     }
 
     if (angular.isDefined(attrs.typeaheadPopupTemplateUrl)) {
-      popUpEl.attr('popup-template-url', attrs.typeaheadPopupTemplateUrl);
+      popUpEl.attr('popup-templates-url', attrs.typeaheadPopupTemplateUrl);
     }
 
     var resetMatches = function() {
@@ -7530,7 +7530,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position'])
       },
       replace: true,
       templateUrl: function(element, attrs) {
-        return attrs.popupTemplateUrl || 'template/typeahead/typeahead-popup.html';
+        return attrs.popupTemplateUrl || 'templates/typeahead/typeahead-popup.html';
       },
       link: function(scope, element, attrs) {
         scope.templateUrl = attrs.templateUrl;
@@ -7562,7 +7562,7 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position'])
         query: '='
       },
       link:function(scope, element, attrs) {
-        var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';
+        var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'templates/typeahead/typeahead-match.html';
         $templateRequest(tplUrl).then(function(tplContent) {
           $compile(tplContent.trim())(scope, function(clonedElement) {
             element.replaceWith(clonedElement);
@@ -7710,13 +7710,13 @@ angular.module('ui.bootstrap.typeahead')
           query: 'query',
           position: 'position'
         });
-        //custom item template
+        //custom item templates
         if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
           popUpEl.attr('template-url', attrs.typeaheadTemplateUrl);
         }
 
         if (angular.isDefined(attrs.typeaheadPopupTemplateUrl)) {
-          popUpEl.attr('popup-template-url', attrs.typeaheadPopupTemplateUrl);
+          popUpEl.attr('popup-templates-url', attrs.typeaheadPopupTemplateUrl);
         }
 
         var resetMatches = function() {
@@ -8042,7 +8042,7 @@ angular.module('ui.bootstrap.typeahead')
       },
       replace: true,
       templateUrl: function(element, attrs) {
-        return attrs.popupTemplateUrl || 'template/typeahead/typeahead-popup.html';
+        return attrs.popupTemplateUrl || 'templates/typeahead/typeahead-popup.html';
       },
       link: function(scope, element, attrs) {
         
@@ -8083,7 +8083,7 @@ angular.module('ui.bootstrap.typeahead')
           $log.warn('typeahead-match is now deprecated. Use uib-typeahead-match instead.');
         }
 
-        var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';
+        var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'templates/typeahead/typeahead-match.html';
         $templateRequest(tplUrl).then(function(tplContent) {
           $compile(tplContent.trim())(scope, function(clonedElement) {
             element.replaceWith(clonedElement);
@@ -8126,7 +8126,7 @@ angular.module('ui.bootstrap.typeahead')
   }]);
 
 angular.module("template/accordion/accordion-group.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/accordion/accordion-group.html",
+  $templateCache.put("templates/accordion/accordion-group.html",
     "<div class=\"panel {{panelClass || 'panel-default'}}\">\n" +
     "  <div class=\"panel-heading\" ng-keypress=\"toggleOpen($event)\">\n" +
     "    <h4 class=\"panel-title\">\n" +
@@ -8141,12 +8141,12 @@ angular.module("template/accordion/accordion-group.html", []).run(["$templateCac
 }]);
 
 angular.module("template/accordion/accordion.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/accordion/accordion.html",
+  $templateCache.put("templates/accordion/accordion.html",
     "<div class=\"panel-group\" ng-transclude></div>");
 }]);
 
 angular.module("template/alert/alert.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/alert/alert.html",
+  $templateCache.put("templates/alert/alert.html",
     "<div class=\"alert\" ng-class=\"['alert-' + (type || 'warning'), closeable ? 'alert-dismissible' : null]\" role=\"alert\">\n" +
     "    <button ng-show=\"closeable\" type=\"button\" class=\"close\" ng-click=\"close({$event: $event})\">\n" +
     "        <span aria-hidden=\"true\">&times;</span>\n" +
@@ -8158,7 +8158,7 @@ angular.module("template/alert/alert.html", []).run(["$templateCache", function(
 }]);
 
 angular.module("template/carousel/carousel.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/carousel/carousel.html",
+  $templateCache.put("templates/carousel/carousel.html",
     "<div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\" ng-swipe-right=\"prev()\" ng-swipe-left=\"next()\">\n" +
     "  <div class=\"carousel-inner\" ng-transclude></div>\n" +
     "  <a role=\"button\" href class=\"left carousel-control\" ng-click=\"prev()\" ng-show=\"slides.length > 1\">\n" +
@@ -8178,7 +8178,7 @@ angular.module("template/carousel/carousel.html", []).run(["$templateCache", fun
 }]);
 
 angular.module("template/carousel/slide.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/carousel/slide.html",
+  $templateCache.put("templates/carousel/slide.html",
     "<div ng-class=\"{\n" +
     "    'active': active\n" +
     "  }\" class=\"item text-center\" ng-transclude></div>\n" +
@@ -8186,7 +8186,7 @@ angular.module("template/carousel/slide.html", []).run(["$templateCache", functi
 }]);
 
 angular.module("template/datepicker/datepicker.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/datepicker/datepicker.html",
+  $templateCache.put("templates/datepicker/datepicker.html",
     "<div ng-switch=\"datepickerMode\" role=\"application\" ng-keydown=\"keydown($event)\">\n" +
     "  <uib-daypicker ng-switch-when=\"day\" tabindex=\"0\"></uib-daypicker>\n" +
     "  <uib-monthpicker ng-switch-when=\"month\" tabindex=\"0\"></uib-monthpicker>\n" +
@@ -8195,7 +8195,7 @@ angular.module("template/datepicker/datepicker.html", []).run(["$templateCache",
 }]);
 
 angular.module("template/datepicker/day.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/datepicker/day.html",
+  $templateCache.put("templates/datepicker/day.html",
     "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
@@ -8221,7 +8221,7 @@ angular.module("template/datepicker/day.html", []).run(["$templateCache", functi
 }]);
 
 angular.module("template/datepicker/month.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/datepicker/month.html",
+  $templateCache.put("templates/datepicker/month.html",
     "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
@@ -8242,7 +8242,7 @@ angular.module("template/datepicker/month.html", []).run(["$templateCache", func
 }]);
 
 angular.module("template/datepicker/popup.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/datepicker/popup.html",
+  $templateCache.put("templates/datepicker/popup.html",
     "<ul class=\"dropdown-menu\" dropdown-nested ng-if=\"isOpen\" style=\"display: block\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" ng-keydown=\"keydown($event)\" ng-click=\"$event.stopPropagation()\">\n" +
     "	<li ng-transclude></li>\n" +
     "	<li ng-if=\"showButtonBar\" style=\"padding:10px 9px 2px\">\n" +
@@ -8257,7 +8257,7 @@ angular.module("template/datepicker/popup.html", []).run(["$templateCache", func
 }]);
 
 angular.module("template/datepicker/year.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/datepicker/year.html",
+  $templateCache.put("templates/datepicker/year.html",
     "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
@@ -8278,7 +8278,7 @@ angular.module("template/datepicker/year.html", []).run(["$templateCache", funct
 }]);
 
 angular.module("template/modal/backdrop.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/modal/backdrop.html",
+  $templateCache.put("templates/modal/backdrop.html",
     "<div uib-modal-animation-class=\"fade\"\n" +
     "     modal-in-class=\"in\"\n" +
     "     ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\"\n" +
@@ -8287,7 +8287,7 @@ angular.module("template/modal/backdrop.html", []).run(["$templateCache", functi
 }]);
 
 angular.module("template/modal/window.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/modal/window.html",
+  $templateCache.put("templates/modal/window.html",
     "<div modal-render=\"{{$isRendered}}\" tabindex=\"-1\" role=\"dialog\" class=\"modal\"\n" +
     "    uib-modal-animation-class=\"fade\"\n" +
     "    modal-in-class=\"in\"\n" +
@@ -8298,7 +8298,7 @@ angular.module("template/modal/window.html", []).run(["$templateCache", function
 }]);
 
 angular.module("template/pagination/pager.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/pagination/pager.html",
+  $templateCache.put("templates/pagination/pager.html",
     "<ul class=\"pager\">\n" +
     "  <li ng-class=\"{disabled: noPrevious()||ngDisabled, previous: align}\"><a href ng-click=\"selectPage(page - 1, $event)\">{{::getText('previous')}}</a></li>\n" +
     "  <li ng-class=\"{disabled: noNext()||ngDisabled, next: align}\"><a href ng-click=\"selectPage(page + 1, $event)\">{{::getText('next')}}</a></li>\n" +
@@ -8307,7 +8307,7 @@ angular.module("template/pagination/pager.html", []).run(["$templateCache", func
 }]);
 
 angular.module("template/pagination/pagination.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/pagination/pagination.html",
+  $templateCache.put("templates/pagination/pagination.html",
     "<ul class=\"pagination\">\n" +
     "  <li ng-if=\"::boundaryLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\" class=\"pagination-first\"><a href ng-click=\"selectPage(1, $event)\">{{::getText('first')}}</a></li>\n" +
     "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\" class=\"pagination-prev\"><a href ng-click=\"selectPage(page - 1, $event)\">{{::getText('previous')}}</a></li>\n" +
@@ -8319,7 +8319,7 @@ angular.module("template/pagination/pagination.html", []).run(["$templateCache",
 }]);
 
 angular.module("template/tooltip/tooltip-html-popup.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/tooltip/tooltip-html-popup.html",
+  $templateCache.put("templates/tooltip/tooltip-html-popup.html",
     "<div\n" +
     "  tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
@@ -8331,7 +8331,7 @@ angular.module("template/tooltip/tooltip-html-popup.html", []).run(["$templateCa
 }]);
 
 angular.module("template/tooltip/tooltip-popup.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/tooltip/tooltip-popup.html",
+  $templateCache.put("templates/tooltip/tooltip-popup.html",
     "<div\n" +
     "  tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
@@ -8343,21 +8343,21 @@ angular.module("template/tooltip/tooltip-popup.html", []).run(["$templateCache",
 }]);
 
 angular.module("template/tooltip/tooltip-template-popup.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/tooltip/tooltip-template-popup.html",
+  $templateCache.put("templates/tooltip/tooltip-templates-popup.html",
     "<div\n" +
     "  tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
     "  ng-class=\"{ in: isOpen() }\">\n" +
     "  <div class=\"tooltip-arrow\"></div>\n" +
     "  <div class=\"tooltip-inner\"\n" +
-    "    uib-tooltip-template-transclude=\"contentExp()\"\n" +
-    "    tooltip-template-transclude-scope=\"originScope()\"></div>\n" +
+    "    uib-tooltip-templates-transclude=\"contentExp()\"\n" +
+    "    tooltip-templates-transclude-scope=\"originScope()\"></div>\n" +
     "</div>\n" +
     "");
 }]);
 
 angular.module("template/popover/popover-html.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/popover/popover-html.html",
+  $templateCache.put("templates/popover/popover-html.html",
     "<div tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
     "  ng-class=\"{ in: isOpen() }\">\n" +
@@ -8372,7 +8372,7 @@ angular.module("template/popover/popover-html.html", []).run(["$templateCache", 
 }]);
 
 angular.module("template/popover/popover-template.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/popover/popover-template.html",
+  $templateCache.put("templates/popover/popover-templates.html",
     "<div tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
     "  ng-class=\"{ in: isOpen() }\">\n" +
@@ -8381,15 +8381,15 @@ angular.module("template/popover/popover-template.html", []).run(["$templateCach
     "  <div class=\"popover-inner\">\n" +
     "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-if=\"title\"></h3>\n" +
     "      <div class=\"popover-content\"\n" +
-    "        uib-tooltip-template-transclude=\"contentExp()\"\n" +
-    "        tooltip-template-transclude-scope=\"originScope()\"></div>\n" +
+    "        uib-tooltip-templates-transclude=\"contentExp()\"\n" +
+    "        tooltip-templates-transclude-scope=\"originScope()\"></div>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
 }]);
 
 angular.module("template/popover/popover.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/popover/popover.html",
+  $templateCache.put("templates/popover/popover.html",
     "<div tooltip-animation-class=\"fade\"\n" +
     "  uib-tooltip-classes\n" +
     "  ng-class=\"{ in: isOpen() }\">\n" +
@@ -8404,18 +8404,18 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
 }]);
 
 angular.module("template/progressbar/bar.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/progressbar/bar.html",
+  $templateCache.put("templates/progressbar/bar.html",
     "<div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: (percent < 100 ? percent : 100) + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" aria-labelledby=\"{{::title}}\" style=\"min-width: 0;\" ng-transclude></div>\n" +
     "");
 }]);
 
 angular.module("template/progressbar/progress.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/progressbar/progress.html",
+  $templateCache.put("templates/progressbar/progress.html",
     "<div class=\"progress\" ng-transclude aria-labelledby=\"{{::title}}\"></div>");
 }]);
 
 angular.module("template/progressbar/progressbar.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/progressbar/progressbar.html",
+  $templateCache.put("templates/progressbar/progressbar.html",
     "<div class=\"progress\">\n" +
     "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: (percent < 100 ? percent : 100) + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" aria-labelledby=\"{{::title}}\" style=\"min-width: 0;\" ng-transclude></div>\n" +
     "</div>\n" +
@@ -8423,7 +8423,7 @@ angular.module("template/progressbar/progressbar.html", []).run(["$templateCache
 }]);
 
 angular.module("template/rating/rating.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/rating/rating.html",
+  $templateCache.put("templates/rating/rating.html",
     "<span ng-mouseleave=\"reset()\" ng-keydown=\"onKeydown($event)\" tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"{{range.length}}\" aria-valuenow=\"{{value}}\">\n" +
     "    <span ng-repeat-start=\"r in range track by $index\" class=\"sr-only\">({{ $index < value ? '*' : ' ' }})</span>\n" +
     "    <i ng-repeat-end ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" class=\"glyphicon\" ng-class=\"$index < value && (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')\" ng-attr-title=\"{{r.title}}\" aria-valuetext=\"{{r.title}}\"></i>\n" +
@@ -8432,7 +8432,7 @@ angular.module("template/rating/rating.html", []).run(["$templateCache", functio
 }]);
 
 angular.module("template/tabs/tab.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/tabs/tab.html",
+  $templateCache.put("templates/tabs/tab.html",
     "<li ng-class=\"{active: active, disabled: disabled}\">\n" +
     "  <a href ng-click=\"select()\" uib-tab-heading-transclude>{{heading}}</a>\n" +
     "</li>\n" +
@@ -8440,7 +8440,7 @@ angular.module("template/tabs/tab.html", []).run(["$templateCache", function($te
 }]);
 
 angular.module("template/tabs/tabset.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/tabs/tabset.html",
+  $templateCache.put("templates/tabs/tabset.html",
     "<div>\n" +
     "  <ul class=\"nav nav-{{type || 'tabs'}}\" ng-class=\"{'nav-stacked': vertical, 'nav-justified': justified}\" ng-transclude></ul>\n" +
     "  <div class=\"tab-content\">\n" +
@@ -8455,7 +8455,7 @@ angular.module("template/tabs/tabset.html", []).run(["$templateCache", function(
 }]);
 
 angular.module("template/timepicker/timepicker.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/timepicker/timepicker.html",
+  $templateCache.put("templates/timepicker/timepicker.html",
     "<table>\n" +
     "  <tbody>\n" +
     "    <tr class=\"text-center\" ng-show=\"::showSpinners\">\n" +
@@ -8486,16 +8486,16 @@ angular.module("template/timepicker/timepicker.html", []).run(["$templateCache",
 }]);
 
 angular.module("template/typeahead/typeahead-match.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/typeahead/typeahead-match.html",
+  $templateCache.put("templates/typeahead/typeahead-match.html",
     "<a href tabindex=\"-1\" ng-bind-html=\"match.label | uibTypeaheadHighlight:query\"></a>\n" +
     "");
 }]);
 
 angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/typeahead/typeahead-popup.html",
+  $templateCache.put("templates/typeahead/typeahead-popup.html",
     "<ul class=\"dropdown-menu\" ng-show=\"isOpen() && !moveInProgress\" ng-style=\"{top: position().top+'px', left: position().left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" +
     "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{::match.id}}\">\n" +
-    "        <div uib-typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" +
+    "        <div uib-typeahead-match index=\"$index\" match=\"match\" query=\"query\" templates-url=\"templateUrl\"></div>\n" +
     "    </li>\n" +
     "</ul>\n" +
     "");
