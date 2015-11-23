@@ -16,9 +16,6 @@ application.controller('notesController', function ($scope, $rootScope, $http) {
             console.log(response);
         });
 
-
-
-
     }, 0);
 
     $scope.go = function(note) {
