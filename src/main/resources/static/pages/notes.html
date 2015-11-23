@@ -1,5 +1,31 @@
-<div class="jumbotron text-center">
+<div class="text-center">
     <h1>Notes Page</h1>
 
-    <p>{{ message }}</p>
+    <div class="row text-left">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li  class="list-group-item" ng-repeat="note in notes | orderBy: 'dateCreated'" ng-click="go(note)">{{note.title}}</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <!--<table class="table table-striped">-->
+                <!--<tr ng-repeat="note in notes | orderBy: '-dateModified'">-->
+                    <!--&lt;!&ndash;<td>{{note.id}}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{note.title}}</td>&ndash;&gt;-->
+                    <!--<td>{{note.content}}</td>-->
+                    <!--<td>{{ note.collaborators}}</td>-->
+                    <!--<td>{{note.dateCreated | date:'medium'}}</td>-->
+                    <!--<td>{{note.dateModified | date:'medium'}}</td>-->
+
+                    <!--<td><a ng-show="note.isOwner">Delete</a></td>-->
+                <!--</tr>-->
+            <!--</table>-->
+
+            <div>
+                {{currentNote.content}}
+            </div>
+
+
+        </div>
+    </div>
 </div>

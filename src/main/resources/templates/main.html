@@ -7,21 +7,22 @@
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.min.css"/>
 
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/angular-route/angular-route.min.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/angular.min.js"></script>
+        <script src="js/lib/angular-route.min.js"></script>
+        <script src="js/lib/angular-resource.min.js"></script>
 
         <script src="js/main.js"></script>
         <script src="js/notesController.js"></script>
         <script src="js/adminController.js"></script>
         <script src="js/userDetailsController.js"></script>
-        <script src="js/factories/note.js"></script>
-        <script src="js/factories/user.js"></script>
+        <script src="js/models/note.js"></script>
+        <script src="js/models/user.js"></script>
+        <script src="js/services/noteService.js"></script>
     </head>
     <body ng-controller="notesController">
         <header>
@@ -29,14 +30,12 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a class="brand" href="/"><img class="logo" src="img/logo.png"/></a>
+                        <span>{{currentUser.getFullName()}}</span>
                     </div>
-
-
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/Notes"><i class="fa fa-sticky-note-o"></i> Notes</a></li>
                         <li><a href="/UserDetails"><i class="fa fa-user"></i> User Details</a></li>
-                        <li ng-show="isAdmin"><a href="/Admin"><i class="fa fa-cog"></i> Admin</a></li>
-
+                        <li ng-show="currentUser.isAdmin()"><a href="/Admin"><i class="fa fa-cog"></i> Admin</a></li>
                         <li><form th:action="@{/logout}" method="post">
                             <button class="btn btn-primary btn-medium">Log Out</button>
                         </form></li>

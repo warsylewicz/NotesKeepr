@@ -18,7 +18,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		http
 				.authorizeRequests()
-				.antMatchers("/", "/Welcome", "/Register").permitAll()
+				.antMatchers("/", "/Register").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
@@ -34,9 +34,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	@Override
 	public void configure(WebSecurity web)
 	{
-
-
-
 		web.ignoring().antMatchers("/bower_components/**");
 	}
 }

@@ -39,7 +39,5 @@ public class SecurityController
 		accountDto.setRoles(roles);
 
 		return accountDto;
-
-
 	}
 }

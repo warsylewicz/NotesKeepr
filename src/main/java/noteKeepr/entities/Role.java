@@ -12,7 +12,6 @@ public class Role implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     private RoleType roleType;
 
     public Role() {}

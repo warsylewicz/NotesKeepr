@@ -27,9 +27,9 @@ public class NoteKeeprApplication
 	public EmbeddedServletContainerCustomizer containerCustomizer() {
 
 		return (container -> {
-			ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/401.html");
-			ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
-			ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500.html");
+			ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/error_pages/401.html");
+			ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/error_pages/404.html");
+			ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error_pages/500.html");
 
 			container.addErrorPages(error401Page, error404Page, error500Page);
 		});

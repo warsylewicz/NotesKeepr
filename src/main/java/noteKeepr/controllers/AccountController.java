@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Account")
+@RequestMapping("/Accounts")
 public class AccountController {
 
     @Autowired
     private AccountRepository accountRepository;
 
-    @RequestMapping(value = "/Test", method = RequestMethod.GET)
-    public List<Account> test()
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Account test()
     {
-        return accountRepository.findByLastName("Lynn");
+        Account account = accountRepository.findByLastName("Lynn");
+
+
+        return account;
     }
 }

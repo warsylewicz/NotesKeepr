@@ -10,7 +10,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry)
 	{
-		registry.addViewController("/Welcome").setViewName("welcome");
 		registry.addViewController("/").setViewName("welcome");
 		registry.addViewController("/Main").setViewName("main");
 		registry.addViewController("/Notes").setViewName("main");

@@ -13,7 +13,7 @@ public interface AccountRepository extends JpaRepository<Account, Long>
     @Override
     List<Account> findAll();
 
-    List<Account> findByLastName(@Param("name") String name);
+    Account findByLastName(@Param("name") String name);
 
 	Account findByUserName(String userName);
 

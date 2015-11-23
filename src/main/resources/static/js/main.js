@@ -1,20 +1,15 @@
-var application = angular.module('application', ['ngRoute'])
+'use strict';
+var application = angular.module('application', ['ngRoute', 'ngResource'])
 
     .run(function ($rootScope, $http) {
-
         $http({
             method: 'GET',
             url: '/CurrentUser'
         }).then(function successCallback(response) {
-            $rootScope.currentUser = response.data;
-            $rootScope.isAdmin = false;
-            angular.forEach($rootScope.currentUser.roles, function(role, index) {
-               if (role === "ADMIN")
-               {
-                   $rootScope.isAdmin = true;
-               }
-            });
 
+
+
+            $rootScope.currentUser = new User(response.data.id, response.data.userName, response.data.firstName, response.data.lastName, response.data.email, response.data.roles);
         }, function errorCallback(response) {
             console.log(response);
         });

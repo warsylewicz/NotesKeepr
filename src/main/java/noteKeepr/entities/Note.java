@@ -2,7 +2,9 @@ package noteKeepr.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Note implements Serializable
@@ -11,12 +13,18 @@ public class Note implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String title;
+
     private String content;
 
     private Long ownerId;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Account> collaborators;
+	private Date dateCreated;
+	private Date dateModified;
+
+	@ElementCollection
+	@CollectionTable(name = "acountIds")
+	private Set<Long> collaborators = new HashSet<>();
 
     public Note() {
         this.content = "";
@@ -42,6 +50,16 @@ public class Note implements Serializable
         this.id = id;
     }
 
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
     public String getContent()
     {
         return content;
@@ -62,13 +80,33 @@ public class Note implements Serializable
         this.ownerId = ownerId;
     }
 
-    public List<Account> getCollaborators()
-    {
-        return collaborators;
-    }
+	public Set<Long> getCollaborators()
+	{
+		return collaborators;
+	}
 
-    public void setCollaborators(List<Account> collaborators)
-    {
-        this.collaborators = collaborators;
-    }
+	public void setCollaborators(Set<Long> collaborators)
+	{
+		this.collaborators = collaborators;
+	}
+
+	public Date getDateCreated()
+	{
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated)
+	{
+		this.dateCreated = dateCreated;
+	}
+
+	public Date getDateModified()
+	{
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified)
+	{
+		this.dateModified = dateModified;
+	}
 }

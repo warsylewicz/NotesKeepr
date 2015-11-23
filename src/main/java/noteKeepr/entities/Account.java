@@ -2,7 +2,8 @@ package noteKeepr.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Account implements Serializable {
@@ -11,39 +12,23 @@ public class Account implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = false)
 	private String firstName;
 
-	@Column(nullable = false)
 	private String lastName;
 
-	@Column(nullable = false)
 	private String userName;
 
-	@Column(nullable = false)
 	private String email;
 
-	@Column(nullable = false)
 	private String password;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@Column(nullable = false)
-	private List<Role> roles;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Note> notes;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Note> notes;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Role> roles = new HashSet<>();
 
 	public Account() {
-	}
-
-	public Account(String firstName, String lastName, String userName, String email, String password, List<Role> roles, List<Note> notes) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
-		this.email = email;
-		this.password = password;
-		this.roles = roles;
-		this.notes = notes;
 	}
 
 	public String getPassword()
@@ -102,20 +87,23 @@ public class Account implements Serializable {
 		this.email = email;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles()
+	{
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles)
+	{
 		this.roles = roles;
 	}
 
-    public List<Note> getNotes() {
-        return notes;
-    }
+	public Set<Note> getNotes()
+	{
+		return notes;
+	}
 
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
-
+	public void setNotes(Set<Note> notes)
+	{
+		this.notes = notes;
+	}
 }
