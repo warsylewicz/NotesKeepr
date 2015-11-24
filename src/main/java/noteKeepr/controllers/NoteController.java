@@ -1,10 +1,14 @@
 package noteKeepr.controllers;
 
+import noteKeepr.entities.Account;
 import noteKeepr.entities.Note;
+import noteKeepr.helpers.SecurityHelper;
 import noteKeepr.models.NoteDto;
 import noteKeepr.repositories.AccountRepository;
 import noteKeepr.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,10 +32,17 @@ public class NoteController
 	@RequestMapping(value = "/All/{id}")
 	public List<NoteDto> getAllAccountNotes(@PathVariable("id") Long id)
 	{
-		List<NoteDto> result = new ArrayList<>();
-		Set <Note> entities = accountRepositry.findOne(id).getNotes();
+        User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = accountRepositry.findByUserName(user.getUsername());
+        if ( !Objects.equals(account.getId(), id) )
+        {
+            throw new SecurityException();
+        }
 
-		for(Note note : entities)
+		List<NoteDto> result = new ArrayList<>();
+		Set<Note> entities = accountRepositry.findOne(id).getNotes();
+
+		for ( Note note : entities )
 		{
 			NoteDto noteDto = new NoteDto();
 			noteDto.setId(note.getId());
@@ -40,11 +51,12 @@ public class NoteController
 			noteDto.setCollaborators(note.getCollaborators());
 			noteDto.setDateCreated(note.getDateCreated());
 			noteDto.setDateModified(note.getDateModified());
-			if (Objects.equals(id, note.getOwnerId()))
+			if ( Objects.equals(id, note.getOwnerId()) )
 			{
 				noteDto.setOwner(true);
 			}
-			else {
+			else
+			{
 				noteDto.setOwner(false);
 			}
 			result.add(noteDto);
@@ -58,8 +70,6 @@ public class NoteController
 	@RequestMapping(value = "/FindAll")
 	public List<Note> findAll()
 	{
-
-
 		return noteRepository.findAll();
 	}
 }
