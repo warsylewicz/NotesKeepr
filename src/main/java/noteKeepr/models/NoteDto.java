@@ -13,13 +13,15 @@ public class NoteDto
 	private boolean isOwner;
 	private Set<Long> collaborators;
 
-	public NoteDto(Long id, String title, String content, boolean isOwner, Set<Long> collaborators)
+	public NoteDto(Long id, String title, String content, boolean isOwner, Set<Long> collaborators, Date dateCreated, Date dateModified)
 	{
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.isOwner = isOwner;
 		this.collaborators = collaborators;
+		this.dateCreated = dateCreated;
+		this.dateModified = dateModified;
 	}
 
 	public NoteDto()

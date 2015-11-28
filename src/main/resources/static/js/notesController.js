@@ -2,7 +2,7 @@
 application.controller('notesController', function ($scope, $rootScope, $http) {
 
     setTimeout(function () {
-        var url = "/Notes/All/" + $rootScope.currentUser.id;
+        var url = "/Notes/" + $rootScope.currentUser.id;
         $http({
             method: 'GET',
             url: url
@@ -16,9 +16,25 @@ application.controller('notesController', function ($scope, $rootScope, $http) {
             console.log(response);
         });
 
-    }, 0);
+    }, 1);
 
-    $scope.go = function(note) {
+    $scope.addNote = function() {
+
+        var url = "/Notes/";
+
+        $scope.currentNote.content = "asdfasdfadsf";
+
+        console.log($scope.currentNote);
+
+        var result = $http.put(url + $scope.currentNote.id, $scope.currentNote);
+
+
+    };
+
+
+
+    $scope.go = function (note) {
         $scope.currentNote = note;
+        $scope.addNote();
     }
 });

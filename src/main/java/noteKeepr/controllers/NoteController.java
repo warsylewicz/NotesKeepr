@@ -1,22 +1,16 @@
 package noteKeepr.controllers;
 
-import noteKeepr.entities.Account;
-import noteKeepr.entities.Note;
-import noteKeepr.helpers.SecurityHelper;
 import noteKeepr.models.NoteDto;
-import noteKeepr.repositories.AccountRepository;
-import noteKeepr.repositories.NoteRepository;
+import noteKeepr.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/Notes")
@@ -24,52 +18,19 @@ public class NoteController
 {
 
 	@Autowired
-	private NoteRepository noteRepository;
+	NoteService noteService;
 
-	@Autowired
-	private AccountRepository accountRepositry;
-
-	@RequestMapping(value = "/All/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public List<NoteDto> getAllAccountNotes(@PathVariable("id") Long id)
 	{
-        User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account account = accountRepositry.findByUserName(user.getUsername());
-        if ( !Objects.equals(account.getId(), id) )
-        {
-            throw new SecurityException();
-        }
-
-		List<NoteDto> result = new ArrayList<>();
-		Set<Note> entities = accountRepositry.findOne(id).getNotes();
-
-		for ( Note note : entities )
-		{
-			NoteDto noteDto = new NoteDto();
-			noteDto.setId(note.getId());
-			noteDto.setTitle(note.getTitle());
-			noteDto.setContent(note.getContent());
-			noteDto.setCollaborators(note.getCollaborators());
-			noteDto.setDateCreated(note.getDateCreated());
-			noteDto.setDateModified(note.getDateModified());
-			if ( Objects.equals(id, note.getOwnerId()) )
-			{
-				noteDto.setOwner(true);
-			}
-			else
-			{
-				noteDto.setOwner(false);
-			}
-			result.add(noteDto);
-		}
-
-		result.stream().sorted((n1, n2) -> n1.getDateCreated().compareTo(n2.getDateCreated()));
-
-		return result;
+        return noteService.getAccountNotes(id);
 	}
 
-	@RequestMapping(value = "/FindAll")
-	public List<Note> findAll()
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<NoteDto> update(@PathVariable("id") Long id, @RequestBody NoteDto noteDto)
 	{
-		return noteRepository.findAll();
+		noteService.update(noteDto);
+		return null;
 	}
+
 }

@@ -5,6 +5,7 @@ import noteKeepr.entities.Role;
 import noteKeepr.enums.RoleType;
 import noteKeepr.models.AccountDto;
 import noteKeepr.repositories.AccountRepository;
+import noteKeepr.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -18,26 +19,11 @@ import java.util.stream.Collectors;
 public class SecurityController
 {
 	@Autowired
-	private AccountRepository accountRepository;
+	private AccountService accountService;
 
 	@RequestMapping(value = "/CurrentUser")
 	public AccountDto getCurrentUser()
 	{
-		User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		Account account = accountRepository.findByUserName(user.getUsername());
-
-		AccountDto accountDto = new AccountDto();
-		accountDto.setId(account.getId());
-		accountDto.setEmail(account.getEmail());
-		accountDto.setFirstName(account.getFirstName());
-		accountDto.setLastName(account.getLastName());
-		accountDto.setUsername(account.getUserName());
-
-		List<RoleType> roles = account.getRoles().stream().map(Role::getRoleType).collect(Collectors.toList());
-
-		accountDto.setRoles(roles);
-
-		return accountDto;
+		return accountService.getCurrentUser();
 	}
 }
