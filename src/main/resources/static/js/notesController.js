@@ -22,7 +22,7 @@ application.controller('notesController', function ($scope, $rootScope, $http) {
 
         var url = "/Notes/";
 
-        $scope.currentNote.content = "asdfasdfadsf";
+        //$scope.currentNote.content = "asdfasdfadsf";
 
         console.log($scope.currentNote);
 
