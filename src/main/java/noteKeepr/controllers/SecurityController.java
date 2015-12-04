@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class SecurityController
 {
 	@Autowired
-	private AccountService accountService;
+	AccountService accountService;
 
 	@RequestMapping(value = "/CurrentUser")
 	public AccountDto getCurrentUser()

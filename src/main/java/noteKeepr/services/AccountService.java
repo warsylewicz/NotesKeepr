@@ -19,6 +19,8 @@ public class AccountService extends BaseService
 
         Account account = accountRepository.findByUserName(user.getUsername());
 
+
+
         AccountDto accountDto = new AccountDto();
         accountDto.setId(account.getId());
         accountDto.setEmail(account.getEmail());

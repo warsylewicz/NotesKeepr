@@ -16,9 +16,9 @@ application.controller('notesController', function ($scope, $rootScope, $http) {
             console.log(response);
         });
 
-    }, 1);
+    }, 1000);
 
-    $scope.addNote = function() {
+    $scope.addNote = function () {
 
         var url = "/Notes/";
 
@@ -31,10 +31,15 @@ application.controller('notesController', function ($scope, $rootScope, $http) {
 
     };
 
-
-
     $scope.go = function (note) {
+
+        $(".select2-collaborators").select2({
+            data: $scope.currentNote.collaborators
+        });
+
+        console.log(note);
         $scope.currentNote = note;
         $scope.addNote();
     }
 });
+

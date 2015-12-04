@@ -3,6 +3,7 @@
 
     <div class="row text-left">
         <div class="col-md-3">
+            <button class="btn btn-default">New</button>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="note in notes | orderBy: 'dateCreated'" ng-click="go(note)">
                     {{note.title}}
@@ -10,10 +11,14 @@
             </ul>
         </div>
         <div class="col-md-9">
-                <div>
-                    {{currentNote.content}}
-                </div>
+            <div>
+                <div class="date">Date Created: <span>{{currentNote.dateCreated}}</span></div>
+                <div class="date">Date Modified: <span>{{currentNote.dateModified}}</span></div>
+                <select class="select2-collaborators" multiple="multiple"></select>
+            </div>
+            <div text-angular ng-model="currentNote.content">
             </div>
         </div>
     </div>
+</div>
 </div>

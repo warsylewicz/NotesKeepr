@@ -1,5 +1,5 @@
 'use strict';
-var application = angular.module('application', ['ngRoute', 'ngResource'])
+var application = angular.module('application', ['ngRoute', 'ngResource', 'textAngular'])
 
     .run(function ($rootScope, $http) {
         $http({
