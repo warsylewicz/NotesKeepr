@@ -33,4 +33,16 @@ public class NoteController
 		return null;
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") Long id)
+	{
+		noteService.delete(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public void create(@PathVariable("id") Long id)
+	{
+		noteService.create(id);
+	}
+
 }

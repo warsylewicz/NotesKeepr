@@ -1,22 +1,14 @@
 'use strict';
-var application = angular.module('application', ['ngRoute', 'ngResource', 'textAngular'])
+var application = angular.module('application', ['ngRoute', 'ngResource', 'textAngular', 'ui.select', 'ngSanitize'])
 
     .run(function ($rootScope, $http) {
-        $http({
-            method: 'GET',
-            url: '/CurrentUser'
-        }).then(function successCallback(response) {
 
-
-
-            $rootScope.currentUser = new User(response.data.id, response.data.userName, response.data.firstName, response.data.lastName, response.data.email, response.data.roles);
-        }, function errorCallback(response) {
-            console.log(response);
+        $http.get('/CurrentUser').success(function (response) {
+            $rootScope.currentUser = new User(response.id, response.userName, response.firstName, response.lastName, response.email, response.roles);
         });
     })
 
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-
 
         $routeProvider.when('/Notes', {
             templateUrl: 'pages/notes.html',

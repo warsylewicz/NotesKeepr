@@ -10,3 +10,12 @@
     max-height: 60px;
     padding-bottom: 5px;
 }
+
+.ui-select-match-item {
+    background-color:#adadad ;
+}
+
+.selected {
+    background-color: lightsteelblue;
+}
+
