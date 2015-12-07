@@ -7,7 +7,7 @@ application.controller('userDetailsController', function ($scope, $rootScope, $h
         $timeout(function () {
             $http.get('/CurrentUser').success(function (response) {
                 $scope.data.user = new User(response.id, response.username, response.firstName, response.lastName, response.email, response.roles);
-                $scope.$rootScope.currentUser = $scope.data.user;
+                $rootScope.currentUser = $scope.data.user;
             });
         }, 100);
     };

@@ -76,21 +76,18 @@ application.controller('notesController', function ($scope, $rootScope, $http, $
 
     $scope.deleteNote = function () {
         $http.delete("/Notes/" + $scope.data.currentNote.id).success(function (response) {
-            console.log(response);
             $scope.loadNotes();
         });
     };
 
     $scope.saveNote = function () {
         $http.put("/Notes/" + $scope.data.currentNote.id, $scope.data.currentNote).success(function (response) {
-            console.log(response);
             $scope.loadNotes();
         });
     };
 
     $scope.addNote = function () {
         $http.post("/Notes/" + $scope.currentUser.id).success(function (response) {
-            console.log(response);
             $scope.loadNotes();
         });
 

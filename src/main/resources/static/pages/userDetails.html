@@ -36,15 +36,20 @@
             <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid
                 email.</p>
         </div>
-        <div class="form-group">
-            <label for="password1">New Password</label>
-            <input type="password" name="password1" class="form-control" id="password1" placeholder="New Password"
-                   ng-model="data.user.password">
-        </div>
-        <div class="form-group">
-            <label for="password2">Re-enter New Password</label>
-            <input type="password" name="password2" class="form-control" id="password2"
-                   placeholder="Re-enter New Password" ng-model="data.password2">
+        <div class="well">
+            <div class="form-group">
+                <label for="password1">New Password</label>
+                <input type="password" name="password1" class="form-control" id="password1" placeholder="New Password"
+                       ng-model="data.user.password">
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="password2">Re-enter New Password</label>
+                <input type="password" name="password2" class="form-control" id="password2"
+                       placeholder="Re-enter New Password" ng-model="data.password2">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
