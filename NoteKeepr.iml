@@ -959,5 +959,12 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="select2" level="application" />
+    <orderEntry type="library" name="textAngular-rangy" level="application" />
+    <orderEntry type="library" name="textAngular-sanitize" level="application" />
+    <orderEntry type="library" name="textAngular" level="application" />
+    <orderEntry type="library" name="angular-route" level="application" />
+    <orderEntry type="library" name="angular-resource" level="application" />
+    <orderEntry type="library" name="select" level="application" />
   </component>
 </module>

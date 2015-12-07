@@ -3,22 +3,52 @@
 
     <div class="row text-left">
         <div class="col-md-3">
-            <button class="btn btn-default">New</button>
+            <div class="form-group">
+                <button class="btn btn-success" ng-click="addNote()">
+                    Add <i class="fa fa-plus"></i>
+                </button>
+            </div>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="note in notes | orderBy: 'dateCreated'" ng-click="go(note)">
+                <li ng-class="{selected : note.id === idSelectedVote}" class="list-group-item"
+                    ng-repeat="note in data.notes | orderBy:'dateModified':true"
+                    ng-click="viewSelectedNote(note)">
                     {{note.title}}
                 </li>
             </ul>
         </div>
         <div class="col-md-9">
-            <div>
-                <div class="date">Date Created: <span>{{currentNote.dateCreated}}</span></div>
-                <div class="date">Date Modified: <span>{{currentNote.dateModified}}</span></div>
-                <select class="select2-collaborators" multiple="multiple"></select>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" ng-model="data.currentNote.title"
+                       ng-blur="saveNote()"/>
             </div>
-            <div text-angular ng-model="currentNote.content">
+            <div class="well">
+                <div class="date">Date Modified: <span>{{data.currentNote.dateModified | date:'medium'}}</span></div>
+                <div class="date">Date Created: <span>{{data.currentNote.dateCreated | date:'medium'}}</span></div>
+            </div>
+            <h4>Collaborators</h4>
+
+            <div class="form-group">
+                <ui-select
+                        multiple
+                        ng-model="collaborators.selected"
+                        theme="bootstrap"
+                        on-select="updateCollaboratorList(collaborators.selected)"
+                        on-remove="updateCollaboratorList(collaborators.selected)">
+                    <ui-select-match placeholder="Add a Collaborator...">
+                        {{$item.name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="user in users | filter: $select.search">
+                        {{user.name}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group">
+                <div text-angular ng-blur="saveNote()" ng-model="data.currentNote.content"></div>
+            </div>
+            <div ng-if="data.currentNote.owner === currentUser.id">
+                <button class="btn btn-danger" ng-click="deleteNote()">Delete</button>
             </div>
         </div>
     </div>
-</div>
 </div>

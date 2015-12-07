@@ -4,6 +4,7 @@ import noteKeepr.enums.RoleType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Role implements Serializable
@@ -13,6 +14,9 @@ public class Role implements Serializable
     private Long id;
 
     private RoleType roleType;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<Account> accounts;
 
     public Role() {}
 

@@ -1,4 +1,57 @@
-<div class="jumbotron text-center">
-    <h1>User Details Page</h1>
-    <p>{{ message }}</p>
+<div>
+    <h1 class="text-center">Account Details</h1>
+
+    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name"
+                   ng-model="data.user.firstName" required>
+
+            <p ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine" class="help-block">First Name
+                Required</p>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name"
+                   ng-model="data.user.lastName" required>
+
+            <p ng-show="userForm.lastName.$invalid && !userForm.lastName.$pristine" class="help-block">Last Name
+                Required</p>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Username"
+                   ng-model="data.user.username" ng-minlength="3" ng-maxlength="16">
+
+            <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
+
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                   ng-model="data.user.email" required>
+
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid
+                email.</p>
+        </div>
+        <div class="well">
+            <div class="form-group">
+                <label for="password1">New Password</label>
+                <input type="password" name="password1" class="form-control" id="password1" placeholder="New Password"
+                       ng-model="data.user.password">
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="password2">Re-enter New Password</label>
+                <input type="password" name="password2" class="form-control" id="password2"
+                       placeholder="Re-enter New Password" ng-model="data.password2">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+    </form>
 </div>

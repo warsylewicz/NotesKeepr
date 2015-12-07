@@ -10,15 +10,15 @@ public class NoteDto
 	private String content;
 	private Date dateCreated;
 	private Date dateModified;
-	private boolean isOwner;
+	private Long ownerId;
 	private Set<Long> collaborators;
 
-	public NoteDto(Long id, String title, String content, boolean isOwner, Set<Long> collaborators, Date dateCreated, Date dateModified)
+	public NoteDto(Long id, String title, String content, Long ownerId, Set<Long> collaborators, Date dateCreated, Date dateModified)
 	{
 		this.id = id;
 		this.title = title;
 		this.content = content;
-		this.isOwner = isOwner;
+		this.ownerId = ownerId;
 		this.collaborators = collaborators;
 		this.dateCreated = dateCreated;
 		this.dateModified = dateModified;
@@ -58,14 +58,14 @@ public class NoteDto
 		this.content = content;
 	}
 
-	public boolean isOwner()
+	public Long getOwner()
 	{
-		return isOwner;
+		return ownerId;
 	}
 
-	public void setOwner(boolean owner)
+	public void setOwner(Long ownerId)
 	{
-		isOwner = owner;
+		this.ownerId = ownerId;
 	}
 
 	public Set<Long> getCollaborators()

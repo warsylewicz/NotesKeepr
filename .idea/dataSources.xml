@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1191733590">
+  <component name="DataSourceManagerImpl" format="xml" hash="99662568">
     <data-source source="LOCAL" name="MySQL - NotesDb@localhost" uuid="c1ba0108-81d9-4583-acf2-7ef8ffc87401">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -13,12 +13,6 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="Oracle - @localhost" uuid="9ddcc703-63a9-41ab-87f8-da17b1030850">
-      <driver-ref>oracle</driver-ref>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@//localhost:1521/XE</jdbc-url>
     </data-source>
   </component>
 </project>
