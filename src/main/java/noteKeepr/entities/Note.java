@@ -39,6 +39,8 @@ public class Note implements Serializable
         this.ownerId = ownerId;
     }
 
+
+
     @PreRemove
     private void removeNotesFromAccounts() {
         for (Account u : collaborators) {

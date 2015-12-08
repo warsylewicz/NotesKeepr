@@ -1,10 +1,14 @@
 package noteKeepr.services;
 
+import java.util.HashSet;
+import java.util.Set;
 import noteKeepr.entities.Account;
+import noteKeepr.entities.Note;
 import noteKeepr.entities.Role;
 import noteKeepr.enums.RoleType;
 import noteKeepr.exceptions.SecurityException;
 import noteKeepr.models.AccountDto;
+import noteKeepr.models.RegisterDto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
@@ -94,5 +98,32 @@ public class AccountService extends BaseService
 		{
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
+    }
+
+    public boolean isValid(RegisterDto registerDto)
+    {
+        if (accountRepository.findByUserName(registerDto.getUsername()) != null)
+        {
+            return false;
+        }
+
+        Account account = new Account();
+
+        account.setFirstName(registerDto.getFirstName());
+        account.setLastName(registerDto.getLastName());
+        account.setUserName(registerDto.getUsername());
+        account.setEmail(registerDto.getEmail());
+        account.setPassword(registerDto.getPassword());
+
+        Set<Role> roles = new HashSet<>();
+
+        roles.add(roleRepository.findByRoleType(RoleType.USER));
+
+        account.setRoles(roles);
+        account.setNotes(new HashSet<>());
+
+        accountRepository.save(account);
+
+        return true;
     }
 }
