@@ -71,53 +71,51 @@ public class NoteService extends BaseService
 
 	public void update(NoteDto model)
 	{
-		// Get the list of collaborator ids
 		List<Long> newCollaboratorIds = model.getCollaborators().stream().collect(Collectors.toList());
-
-		// Get the new collaborator list
 		List<Account> newCollaborators = newCollaboratorIds.stream().map(id -> accountRepository.findOne(id)).collect(Collectors.toList());
-
-		// Get the note entity
 		Note entity = noteRepository.findOne(model.getId());
-
-		// Get accounts
 		Set<Account> accounts = accountRepository.findByNotes(entity);
 
-		entity.setContent(model.getContent());
-		entity.setTitle(model.getTitle());
-		entity.getCollaborators().clear();
+		for (Account user : accounts)
+		{
+			Set<Note> notes = new HashSet<>();
+
+			for (Note note : user.getNotes())
+			{
+				if (Objects.equals(note.getId(), entity.getId()))
+				{
+					notes.add(note);
+				}
+			}
+
+			for (Note note : notes)
+			{
+				user.getNotes().remove(note);
+			}
+			accountRepository.saveAndFlush(user);
+		}
 
 		for (Account collaborator : newCollaborators)
 		{
 			entity.getCollaborators().add(collaborator);
 		}
 
+		entity.setContent(model.getContent());
+		entity.setTitle(model.getTitle());
+		entity.getCollaborators().clear();
 		entity.setDateModified(new Date());
 
 		noteRepository.saveAndFlush(entity);
 
-		for (Account account : accounts)
+		for (Account user : newCollaborators)
 		{
-			account.getNotes().stream().filter(note -> Objects.equals(note.getId(), model.getId())).forEach(note -> {
-				note.setContent(model.getContent());
-				note.setTitle(model.getTitle());
-				note.getCollaborators().clear();
-
-				for (Account collaborator : newCollaborators)
-				{
-					note.getCollaborators().add(collaborator);
-				}
-
-				note.setDateModified(new Date());
-			});
-			accountRepository.saveAndFlush(account);
+			user.getNotes().add(entity);
+			accountRepository.saveAndFlush(user);
 		}
-
 	}
 
 	public void delete(Long id)
 	{
-		Note note = noteRepository.findOne(id);
 		noteRepository.delete(id);
 	}
 

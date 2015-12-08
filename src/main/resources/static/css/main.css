@@ -1,3 +1,7 @@
+body {
+    background-color: #F6F7F7;
+}
+
 .navbar .brand {
     max-height: 80px;
     max-width: 30%;
@@ -12,10 +16,48 @@
 }
 
 .ui-select-match-item {
-    background-color:#adadad ;
+    background-color: #61b1c8;
 }
 
 .selected {
-    background-color: lightsteelblue;
+    background-color: #61b1c8;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.color1 {
+    color: #000000
+}
+
+.color2 {
+    color: #C6C9Ca
+}
+
+.color3 {
+    color: #c
+}
+
+.color4 {
+    color: #a7a37e
+}
+
+.color5 {
+    color: #046181
+}
+
+.editable-click {
+    border-bottom: none;
+    color: black
+}
+
+.editable-buttons {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.editable-input.editable-has-buttons {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

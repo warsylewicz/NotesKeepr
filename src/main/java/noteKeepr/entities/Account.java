@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Account implements Serializable {
-
+public class Account implements Serializable
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,10 +25,32 @@ public class Account implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Note> notes;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "account_roles", joinColumns = @JoinColumn(name = "accounts_id"),
+			inverseJoinColumns = @JoinColumn(name = "roles_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	public Account() {
+	public Account()
+	{
+	}
+
+	@PreUpdate
+	private void updateRoles()
+	{
+		System.out.println();
+	}
+
+	@PreRemove
+	private void removeAccountFromNotesAndRoles()
+	{
+		for (Note note : notes)
+		{
+			note.getCollaborators().remove(this);
+		}
+		for (Role role : roles)
+		{
+			role.getAccounts().remove(this);
+		}
 	}
 
 	public String getPassword()
@@ -41,19 +63,23 @@ public class Account implements Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
+	public String getFirstName()
+	{
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName)
+	{
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
+	public String getLastName()
+	{
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName)
+	{
 		this.lastName = lastName;
 	}
 

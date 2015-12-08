@@ -43,4 +43,14 @@ public class Role implements Serializable
     {
         this.roleType = roleType;
     }
+
+    public Set<Account> getAccounts()
+    {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts)
+    {
+        this.accounts = accounts;
+    }
 }

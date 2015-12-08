@@ -1,10 +1,15 @@
 'use strict';
-var application = angular.module('application', ['ngRoute', 'ngResource', 'textAngular', 'ui.select', 'ngSanitize'])
+var application = angular.module('application', ['ngRoute',
+        'ngResource',
+        'textAngular',
+        'ui.select',
+        'ngSanitize',
+        'frapontillo.bootstrap-switch',
+        'xeditable'])
 
     .run(function ($rootScope, $http) {
-
         $http.get('/CurrentUser').success(function (response) {
-            $rootScope.currentUser = new User(response.id, response.userName, response.firstName, response.lastName, response.email, response.roles);
+            $rootScope.currentUser = new User(response.id, response.username, response.firstName, response.lastName, response.email, response.roles);
         });
     })
 

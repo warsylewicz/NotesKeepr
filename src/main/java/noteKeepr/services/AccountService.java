@@ -1,9 +1,6 @@
 package noteKeepr.services;
 
-import java.util.HashSet;
-import java.util.Set;
 import noteKeepr.entities.Account;
-import noteKeepr.entities.Note;
 import noteKeepr.entities.Role;
 import noteKeepr.enums.RoleType;
 import noteKeepr.exceptions.SecurityException;
@@ -13,9 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,12 +29,33 @@ public class AccountService extends BaseService
         accountDto.setLastName(account.getLastName());
         accountDto.setUsername(account.getUserName());
 
-        List<RoleType> roles = account.getRoles().stream().map(Role::getRoleType).collect(Collectors.toList());
+        Set<RoleType> roles = account.getRoles().stream().map(Role::getRoleType).collect(Collectors.toSet());
 
         accountDto.setRoles(roles);
 
         return accountDto;
     }
+
+	public List<AccountDto> findAll()
+	{
+		List<Account> entities = accountRepository.findAll();
+		List<AccountDto> models = new ArrayList<>();
+
+		entities.stream().forEach(entity -> {
+			AccountDto accountDto = new AccountDto();
+			accountDto.setId(entity.getId());
+			accountDto.setFirstName(entity.getFirstName());
+			accountDto.setLastName(entity.getLastName());
+			accountDto.setUsername(entity.getUserName());
+			accountDto.setEmail(entity.getEmail());
+			Set<RoleType> roles = entity.getRoles().stream().map(Role::getRoleType).collect(Collectors.toSet());
+			accountDto.setRoles(roles);
+
+			models.add(accountDto);
+		});
+
+		return models;
+	}
 
     public List<AccountDto> getUserSelectList()
     {
@@ -68,31 +84,49 @@ public class AccountService extends BaseService
 
         Account currentUser = accountRepository.findByUserName(user.getUsername());
 
-        if (!Objects.equals(currentUser.getId(), id))
-        {
-            throw new SecurityException();
-        }
+		boolean isAdmin = false;
 
-        currentUser.setEmail(model.getEmail());
-        currentUser.setFirstName(model.getFirstName());
-        currentUser.setLastName(model.getLastName());
+		for (Role role : currentUser.getRoles())
+		{
+			if (role.getRoleType() == RoleType.ADMIN)
+			{
+				isAdmin = true;
+			}
+		}
 
-        if (!Objects.equals(currentUser.getUserName(), model.getUsername()))
+		if (!isAdmin)
+		{
+			if (!Objects.equals(currentUser.getId(), id) )
+			{
+				throw new SecurityException();
+			}
+		}
+
+		Account entity = accountRepository.findOne(id);
+
+		Set<Role> roles = model.getRoles().stream().map(roleType -> roleRepository.findByRoleType(roleType)).collect(Collectors.toSet());
+
+		entity.setRoles(roles);
+
+		entity.setEmail(model.getEmail());
+		entity.setFirstName(model.getFirstName());
+		entity.setLastName(model.getLastName());
+
+        if (!Objects.equals(entity.getUserName(), model.getUsername()))
         {
             if (accountRepository.findByUserName(model.getUsername())== null)
             {
-                currentUser.setUserName(model.getUsername());
+				entity.setUserName(model.getUsername());
 				logout = true;
-
             }
         }
 
 		if (model.getPassword() != null && !model.getPassword().isEmpty() )
 		{
-			currentUser.setPassword(model.getPassword());
+			entity.setPassword(model.getPassword());
 		}
 
-        accountRepository.saveAndFlush(currentUser);
+        accountRepository.saveAndFlush(entity);
 
 		if (logout)
 		{
@@ -126,4 +160,27 @@ public class AccountService extends BaseService
 
         return true;
     }
+
+
+	public void create(AccountDto model)
+	{
+		Account entity = new Account();
+		entity.setUserName(model.getUsername());
+		entity.setEmail(model.getEmail());
+		entity.setFirstName(model.getFirstName());
+		entity.setLastName(model.getLastName());
+		entity.setPassword("password");
+
+		Set<Role> roles = new HashSet<>();
+		roles.add(roleRepository.findByRoleType(RoleType.USER));
+		entity.setRoles(roles);
+		entity.setNotes(new HashSet<>());
+
+		accountRepository.save(entity);
+	}
+
+	public void delete(Long id)
+	{
+		accountRepository.delete(id);
+	}
 }

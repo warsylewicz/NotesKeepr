@@ -1,25 +1,26 @@
 'use strict'
 class User {
-    constructor(id, userName, firstName, lastName, email, roles) {
+    constructor(id, userName, firstName, lastName, email, roles, isAdmin) {
         this.id = id;
         this.username = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.roles = roles;
+        this.isAdmin = isAdmin;
     }
 
-    isAdmin() {
-
-        var value = false;
-
-        angular.forEach(this.roles, function (role) {
-            if (role === "ADMIN") {
-                value = true;
-            }
-        });
-        return value;
-    }
+    //isAdmin() {
+    //
+    //    var value = false;
+    //
+    //    angular.forEach(this.roles, function (role) {
+    //        if (role === "ADMIN") {
+    //            value = true;
+    //        }
+    //    });
+    //    return value;
+    //}
 
     getFullName() {
         return this.firstName + " " + this.lastName;

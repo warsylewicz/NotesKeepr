@@ -23,14 +23,13 @@ public class NoteController
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public List<NoteDto> getAllAccountNotes(@PathVariable("id") Long id)
 	{
-        return noteService.getAccountNotes(id);
+		return noteService.getAccountNotes(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<NoteDto> update(@PathVariable("id") Long id, @RequestBody NoteDto noteDto)
+	public void update(@PathVariable("id") Long id, @RequestBody NoteDto noteDto)
 	{
 		noteService.update(noteDto);
-		return null;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

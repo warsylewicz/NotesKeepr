@@ -1,12 +1,8 @@
 package noteKeepr.entities;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,8 +23,7 @@ public class Note implements Serializable
 	private Date dateModified;
 
     @ManyToMany(mappedBy = "notes")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Account> collaborators = new HashSet<>();
+    private Set<Account> collaborators;
 
     public Note() {
         this.content = "";
@@ -38,8 +33,6 @@ public class Note implements Serializable
         this.content = content;
         this.ownerId = ownerId;
     }
-
-
 
     @PreRemove
     private void removeNotesFromAccounts() {

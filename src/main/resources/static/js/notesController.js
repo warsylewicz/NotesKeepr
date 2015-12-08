@@ -2,10 +2,12 @@
 
 application.controller('notesController', function ($scope, $rootScope, $http, $timeout) {
 
+    $scope.collaborators = {};
+    $scope.data = {};
+
     $scope.loadNotes = function () {
 
-        $scope.collaborators = {};
-        $scope.data = {};
+
 
         $timeout(function () {
             $http.get("/Notes/" + $rootScope.currentUser.id).success(function (response) {
@@ -26,14 +28,14 @@ application.controller('notesController', function ($scope, $rootScope, $http, $
                 $scope.data.currentNote = $scope.data.notes[index];
                 $scope.idSelectedVote = $scope.data.currentNote.id;
             });
-        }, 100);
+        }, 1);
     };
 
     $scope.loadNotes();
 
     $http({
         method: 'GET',
-        url: "/Accounts/GetUserList"
+        url: "/Accounts/UserSelectList"
     }).then(function successCallback(response) {
         var result = [];
         angular.forEach(response.data, function (item) {

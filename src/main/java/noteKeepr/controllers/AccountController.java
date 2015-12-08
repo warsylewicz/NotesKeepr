@@ -28,7 +28,7 @@ public class AccountController
         return "Success";
     }
 
-    @RequestMapping(value = "/GetUserList", method = RequestMethod.GET)
+    @RequestMapping(value = "/UserSelectList", method = RequestMethod.GET)
     public List<AccountDto> getUserSelectList() {
 
         return accountService.getUserSelectList();
@@ -40,4 +40,24 @@ public class AccountController
 		accountService.update(id, accountDto);
 		return null;
 	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public List<AccountDto> findAll() {
+
+		return accountService.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public void create(@RequestBody AccountDto accountDto) {
+
+		accountService.create(accountDto);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") Long id)
+	{
+		accountService.delete(id);
+	}
+
+
 }

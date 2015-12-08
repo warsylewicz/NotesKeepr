@@ -2,7 +2,7 @@ package noteKeepr.models;
 
 import noteKeepr.enums.RoleType;
 
-import java.util.List;
+import java.util.Set;
 
 public class AccountDto
 {
@@ -11,7 +11,7 @@ public class AccountDto
 	private String firstName;
 	private String lastName;
 	private String email;
-	private List<RoleType> roles;
+	private Set<RoleType> roles;
 	private String password;
 
 	public String getPassword()
@@ -74,12 +74,12 @@ public class AccountDto
 		this.email = email;
 	}
 
-	public List<RoleType> getRoles()
+	public Set<RoleType> getRoles()
 	{
 		return roles;
 	}
 
-	public void setRoles(List<RoleType> roles)
+	public void setRoles(Set<RoleType> roles)
 	{
 		this.roles = roles;
 	}

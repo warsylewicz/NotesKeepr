@@ -1,5 +1,99 @@
-<div class="jumbotron text-center">
-    <h1>Admin Page</h1>
+<div>
 
-    <p>{{ message }}</p>
+    <h3 class="text-center">Administration</h3>
+
+    <div class="col-md-12">
+        <table st-table="data.users" class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th class="text-center">Admin Status</th>
+                    <th class="text-center">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in data.users">
+                    <td class="text-left " e-style="width: 100px" editable-text="user.username"
+                        onaftersave="function.updateUserList(user)">{{user.username}}
+                    </td>
+                    <td class="text-left" e-style="width: 100px" editable-text="user.firstName"
+                        onaftersave="function.updateUserList(user)">{{user.firstName}}
+                    </td>
+                    <td class="text-left" e-style="width: 100px" editable-text="user.lastName"
+                        onaftersave="function.updateUserList(user)">{{user.lastName}}
+                    </td>
+                    <td class="text-left" e-style="width: 160px" editable-email="user.email"
+                        onaftersave="function.updateUserList(user)">{{user.email}}
+                    </td>
+                    <td class="text-center"><input bs-switch ng-change="function.updateUserList(user)"
+                                                   ng-model="user.isAdmin" type="checkbox" switch-active="true"
+                                                   switch-size="mini"
+                                                   switch-on-text="Yes" switch-off-text="No"/></td>
+                    <td class="text-center" ng-click="function.removeUser(user)"><i class="fa fa-trash"></i></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Add User <i class="fa fa-plus"></i>
+        </button>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add User</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="firstName">First Name</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="firstName" class="form-control" id="firstName"
+                                       ng-model="data.newUser.firstName" placeholder="First Name" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="lastName">Last Name</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="lastName" class="form-control" id="lastName"
+                                       ng-model="data.newUser.lastName" placeholder="Last Name" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="username">Username</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="username" class="form-control" id="username"
+                                       ng-model="data.newUser.username" placeholder="UserName" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email</label>
+
+                            <div class="col-sm-9">
+                                <input type="email" name="email" class="form-control" id="email" ng-model="data.newUser.email" placeholder="Email" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="function.addUser()">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
