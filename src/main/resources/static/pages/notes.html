@@ -8,13 +8,15 @@
                     Add <i class="fa fa-plus"></i>
                 </button>
             </div>
-            <ul class="list-group">
-                <li ng-class="{selected : note.id === idSelectedVote}" class="list-group-item"
-                    ng-repeat="note in data.notes | orderBy:'dateModified':true"
-                    ng-click="viewSelectedNote(note)">
-                    {{note.title}}
-                </li>
-            </ul>
+            <div class="page-single">
+                <ul class="list-group">
+                    <li ng-class="{selected : note.id === idSelectedVote}" class="list-group-item"
+                        ng-repeat="note in data.notes | orderBy:'dateModified':true"
+                        ng-click="viewSelectedNote(note)">
+                        {{note.title}}
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="form-group">

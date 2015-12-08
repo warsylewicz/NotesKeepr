@@ -39,8 +39,6 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
             user.roles = ["USER"];
         }
 
-        var newUser = new User(user.id, user.username, user.firstName, user.lastName, user.email, user.roles);
-
         $http.put('/Accounts/' + user.id, user).success(function(response) {
             $scope.function.getUserList();
         });
@@ -59,7 +57,14 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
 
         $http.post("/Accounts", newUser).success(function (response) {
             $scope.function.getUserList();
+            $scope.data.newUser = {};
         });
-    }
+    };
 
+    $scope.getters={
+        username: function (value) {
+            //this will sort by the length of the first name string
+            return value.username.length;
+        }
+    }
 });

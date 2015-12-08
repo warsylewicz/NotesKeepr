@@ -27,7 +27,7 @@ public class RegistrationController
     {
         if ( accountService.isValid(registerDto) )
         {
-            return "login";
+            return "welcome";
         }
         else
         {

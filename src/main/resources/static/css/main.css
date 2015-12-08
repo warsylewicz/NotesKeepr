@@ -35,9 +35,7 @@ body {
     color: #C6C9Ca
 }
 
-.color3 {
-    color: #c
-}
+
 
 .color4 {
     color: #a7a37e
@@ -60,4 +58,10 @@ body {
 .editable-input.editable-has-buttons {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.page-single {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

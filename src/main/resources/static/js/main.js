@@ -9,7 +9,16 @@ var application = angular.module('application', ['ngRoute',
 
     .run(function ($rootScope, $http) {
         $http.get('/CurrentUser').success(function (response) {
-            $rootScope.currentUser = new User(response.id, response.username, response.firstName, response.lastName, response.email, response.roles);
+
+            var isAdmin = false;
+            angular.forEach(response.roles, function (item) {
+               if (item === "ADMIN")
+               {
+                   isAdmin = true;
+               }
+            });
+            $rootScope.currentUser = new User(response.id, response.username, response.firstName, response.lastName, response.email, response.roles, isAdmin);
+            $rootScope.isAdmin = isAdmin;
         });
     })
 

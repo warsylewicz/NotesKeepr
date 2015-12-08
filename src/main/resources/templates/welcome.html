@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>NoteKeepr</title>
-
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
 
     </head>
     <body>
-        <h1>Welcome!</h1>
 
-        <p>Click <a th:href="@{/Main}">here</a> to log in.</p>
+        <h2 class="text-center">NoteKeepr</h2>
+
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="well">
+                <h3>Login</h3>
+                <form th:action="@{/}" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="admin"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password" value="password"/>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                    <a href="/Register">Register</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="well">
+                <h3>Login</h3>
+                <form th:action="@{/}" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" name="username" value="lynnjoshua"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" name="password" value="password"/>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                    <a href="/Register">Register</a>
+                </form>
+            </div>
+        </div>
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
