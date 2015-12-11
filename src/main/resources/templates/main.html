@@ -6,15 +6,20 @@
 
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico"/>
 
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.6/textAngular.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.13.2/select.min.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.4.6/textAngular.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.13.2/select.min.css"/>
         <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.1.9/css/xeditable.css"/>
-        <!--<link rel="stylesheet" type="text/css" href="css/lib/angular-toastr.min.css"/>-->
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.1.9/css/xeditable.css"/>
 
         <link rel="stylesheet" href="css/lib/bootstrap-switch.min.css"/>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
 
     </head>
@@ -23,19 +28,30 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="brand" href="/"><img class="logo" src="img/logo.png"/></a>
-                        <span>{{currentUser.getFullName()}}</span>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img class="logo-brand" src="img/logo.png"/></a>
                     </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/Notes"><i class="fa fa-sticky-note-o"></i> Notes</a></li>
-                        <li><a href="/UserDetails"><i class="fa fa-user"></i> User Details</a></li>
-                        <li ng-show="isAdmin"><a href="/Admin"><i class="fa fa-cog"></i> Admin</a></li>
-                        <li>
-                            <form th:action="@{/logout}" method="post">
-                                <button class="btn btn-primary btn-medium">Log Out</button>
-                            </form>
-                        </li>
-                    </ul>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/Notes"><i class="fa fa-sticky-note-o"></i> Notes</a></li>
+                            <li><a href="/UserDetails"><i class="fa fa-user"></i> User Details</a></li>
+                            <li ng-show="isAdmin"><a href="/Admin"><i class="fa fa-cog"></i> Admin</a></li>
+                            <li>
+                                <div>
+                                    <form th:action="@{/logout}" method="post">
+                                        <button id="logout-button" class="btn btn-primary btn-medium">Log Out</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
         </header>
@@ -57,7 +73,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.13.2/select.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.5/smart-table.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.1.9/js/xeditable.min.js"></script>
-        <!--<script src="js/lib/angular-toastr.min.js"></script>-->
+        <!--<script src="js/lib/angular-sanitize.min.js"></script>-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
         <script src="js/lib/bootstrap-switch.min.js"></script>
         <script src="js/lib/angular-bootstrap-switch.min.js"></script>
 
@@ -68,6 +86,5 @@
         <script src="js/userDetailsController.js"></script>
         <script src="js/models/note.js"></script>
         <script src="js/models/user.js"></script>
-        <script src="js/services/noteService.js"></script>
     </body>
 </html>

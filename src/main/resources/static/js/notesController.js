@@ -2,12 +2,21 @@
 
 application.controller('notesController', function ($scope, $rootScope, $http, $timeout) {
 
+    toastr.options.showEasing = 'swing';
+    toastr.options.timeOut = 1500;
+    toastr.options.extendedTimeOut = 1500;
+    toastr.options.closeMethod = 'fadeOut';
+
     $scope.collaborators = {};
     $scope.data = {};
+    $scope.data.currentNote = {};
+    $scope.function = {};
+
+    $scope.function.isOwner = function () {
+        return $rootScope.currentUser.id === $scope.data.currentNote.owner;
+    };
 
     $scope.loadNotes = function () {
-
-
 
         $timeout(function () {
             $http.get("/Notes/" + $rootScope.currentUser.id).success(function (response) {
@@ -28,7 +37,7 @@ application.controller('notesController', function ($scope, $rootScope, $http, $
                 $scope.data.currentNote = $scope.data.notes[index];
                 $scope.idSelectedVote = $scope.data.currentNote.id;
             });
-        }, 1);
+        }, 100);
     };
 
     $scope.loadNotes();
@@ -79,20 +88,27 @@ application.controller('notesController', function ($scope, $rootScope, $http, $
     $scope.deleteNote = function () {
         $http.delete("/Notes/" + $scope.data.currentNote.id).success(function (response) {
             $scope.loadNotes();
+            toastr.success('Note Deleted')
         });
     };
 
     $scope.saveNote = function () {
         $http.put("/Notes/" + $scope.data.currentNote.id, $scope.data.currentNote).success(function (response) {
             $scope.loadNotes();
+            toastr.success('Note Updated')
         });
     };
 
     $scope.addNote = function () {
-        $http.post("/Notes/" + $scope.currentUser.id).success(function (response) {
+        $http.post("/Notes/" + $rootScope.currentUser.id).success(function (response) {
             $scope.loadNotes();
+            toastr.success('Note Added')
         });
 
     };
+
+
+
+
 });
 

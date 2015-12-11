@@ -969,5 +969,7 @@
     <orderEntry type="library" name="smart-table" level="application" />
     <orderEntry type="library" name="xeditable" level="application" />
     <orderEntry type="library" name="toaster" level="application" />
+    <orderEntry type="library" name="angular-animate" level="application" />
+    <orderEntry type="library" name="toastr" level="application" />
   </component>
 </module>

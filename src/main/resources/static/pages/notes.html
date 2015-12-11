@@ -31,7 +31,9 @@
             <h4>Collaborators</h4>
 
             <div class="form-group">
+                <div ng-if="function.isOwner()">
                 <ui-select
+                        ng-disabled="false"
                         multiple
                         ng-model="collaborators.selected"
                         theme="bootstrap"
@@ -44,7 +46,29 @@
                         {{user.name}}
                     </ui-select-choices>
                 </ui-select>
+                </div>
             </div>
+
+            <div class="form-group">
+                <div ng-if="!function.isOwner()">
+                    <ui-select
+                            ng-disabled="true"
+                            multiple
+                            ng-model="collaborators.selected"
+                            theme="bootstrap"
+                            on-select="updateCollaboratorList(collaborators.selected)"
+                            on-remove="updateCollaboratorList(collaborators.selected)">
+                        <ui-select-match placeholder="Add a Collaborator...">
+                            {{$item.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="user in users | filter: $select.search">
+                            {{user.name}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+
             <div class="form-group">
                 <div text-angular ng-blur="saveNote()" ng-model="data.currentNote.content"></div>
             </div>

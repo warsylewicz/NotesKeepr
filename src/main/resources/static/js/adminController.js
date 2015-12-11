@@ -6,6 +6,11 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
     $scope.data = {};
     $scope.data.newUser = {};
 
+    toastr.options.showEasing = 'swing';
+    toastr.options.timeOut = 1500;
+    toastr.options.extendedTimeOut = 1500;
+    toastr.options.closeMethod = 'fadeOut';
+
     editableOptions.theme = 'bs3';
 
     $scope.function.getUserList = function () {
@@ -41,6 +46,7 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
 
         $http.put('/Accounts/' + user.id, user).success(function(response) {
             $scope.function.getUserList();
+            toastr.success('User Successfully Updated')
         });
     };
 
@@ -48,6 +54,7 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
 
         $http.delete("/Accounts/" + user.id).success(function (response) {
             $scope.function.getUserList();
+            toastr.success('User Successfully Deleted')
         });
     };
 
@@ -58,6 +65,7 @@ application.controller('adminController', function ($scope, $http, $rootScope, e
         $http.post("/Accounts", newUser).success(function (response) {
             $scope.function.getUserList();
             $scope.data.newUser = {};
+            toastr.success('User Successfully Added')
         });
     };
 

@@ -2,17 +2,36 @@ body {
     background-color: #F6F7F7;
 }
 
-.navbar .brand {
-    max-height: 80px;
-    max-width: 30%;
-    overflow: visible;
-    padding-top: 0;
-    padding-bottom: 0;
+#logout-button {
+    margin-top: 15px;
+    vertical-align: middle;
 }
 
-.logo {
-    max-height: 60px;
+.navbar-nav li a {
+    line-height: 40px;
+}
+
+.navbar .navbar-nav {
+    max-height: 80px;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.logo-brand {
+    max-height: 45px;
+    vertical-align: middle;
     padding-bottom: 5px;
+}
+
+.logo-header {
+    max-height: 45px;
+    vertical-align: middle;
+    padding-bottom: 10px;
 }
 
 .ui-select-match-item {
